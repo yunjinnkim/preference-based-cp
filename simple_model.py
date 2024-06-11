@@ -100,20 +100,22 @@ class ClassifierModel(nn.Module):
 
 
 class DyadRankingModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim, num_classes):
         super(DyadRankingModel, self).__init__()
         self.input = nn.Linear(input_dim, hidden_dim)
-        self.hidden = nn.Linear(hidden_dim, output_dim)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(p=0.25)
+        self.num_classes = num_classes
+
+        # output dimension is always 1
+        self.hidden = nn.Linear(hidden_dim, 1)
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
         x = self.input(x)
-        x = self.relu(x)
+        x = self.sigmoid(x)
         x = self.hidden(x)
         return x
 
-    def fit(self, train_loader, learning_rate=0.01, num_epochs=100):
+    def fit(self, train_loader, learning_rate=0.001, num_epochs=1000):
         loss_fn = torch.nn.CrossEntropyLoss()
 
         optimizer = torch.optim.SGD(self.parameters(), lr=learning_rate)
@@ -142,6 +144,12 @@ class DyadRankingModel(nn.Module):
     #         probabilities = torch.softmax(logits, dim=1)
     #     return probabilities.numpy()
 
-    def predict(self, X):
-        probabilities = self.predict_proba(X)
-        return np.argmax(probabilities, axis=1)
+    # def predict_class_label(self, X):
+    #     # create dyads
+    #     eye = torch.eye(self.num_classes)
+    #     eye = eye.repeat(X.)
+    #     x_long = x.
+    #     x_long.
+
+    #     probabilities = self.predict_proba(X)
+    #     return np.argmax(probabilities, axis=1)
