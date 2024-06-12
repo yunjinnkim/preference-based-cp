@@ -72,7 +72,7 @@ class ClassifierModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, learning_rate=0.01, num_epochs=100):
+    def _fit(self, train_loader, learning_rate=0.001, num_epochs=100):
         """Torch implementation for fitting the neural network
 
         :param train_loader: Loader for training data
@@ -147,7 +147,7 @@ class DyadRankingModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, learning_rate=0.001, num_epochs=1000):
+    def _fit(self, train_loader, learning_rate=0.001, num_epochs=100):
         optimizer = torch.optim.SGD(self.parameters(), lr=learning_rate)
 
         # optimization loop
