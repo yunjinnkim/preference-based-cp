@@ -1,5 +1,8 @@
 import torch
 import numpy as np
+
+from sklearn.exceptions import NotFittedError
+
 from torch import nn
 
 import torch
@@ -24,9 +27,7 @@ class DyadOneHotPairDataset(Dataset):
     :param Dataset: _description_
     """
 
-    def __init__(self, X, y, num_classes=None):
-        if not num_classes:
-            num_classes = max(y) + 1
+    def __init__(self, X, y, num_classes):
         dyad_pairs = []
         eye = torch.eye(num_classes)
 
@@ -57,20 +58,33 @@ class DyadOneHotPairDataset(Dataset):
 
 
 class ClassifierModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    """Simple neural network for classification"""
+
+    def __init__(self, output_dim):
+        self.output_dim = output_dim
         super(ClassifierModel, self).__init__()
-        self.input = nn.Linear(input_dim, hidden_dim)
-        self.hidden = nn.Linear(hidden_dim, output_dim)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(p=0.25)
+
+    def instantiate_model(self, X, y, hidden_dim=16):
+        self.input = nn.Linear(X.shape[1], hidden_dim)
+        self.hidden = nn.Linear(hidden_dim, self.output_dim)
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+        if not self.input:
+            raise NotFittedError()
+
         x = self.input(x)
-        x = self.relu(x)
+        x = self.sigmoid(x)
         x = self.hidden(x)
         return x
 
-    def fit(self, train_loader, learning_rate=0.01, num_epochs=100):
+    def _fit(self, train_loader, learning_rate=0.01, num_epochs=100):
+        """Torch implementation for fitting the neural network
+
+        :param train_loader: Loader for training data
+        :param learning_rate: Learning rate for the optimizer, defaults to 0.01
+        :param num_epochs: Number of epochs, defaults to 100
+        """
         loss_fn = torch.nn.CrossEntropyLoss()
 
         optimizer = torch.optim.SGD(self.parameters(), lr=learning_rate)
@@ -80,14 +94,32 @@ class ClassifierModel(nn.Module):
             self.train()
 
             for i, (inputs, labels) in enumerate(train_loader):
-                print(labels)
                 optimizer.zero_grad()
                 outputs = self(inputs)
                 loss = loss_fn(outputs, labels)
                 loss.backward()
                 optimizer.step()
 
+    def fit(self, X, y, learning_rate=0.01, num_epochs=100, batch_size=32):
+        """sklearn style function that takes X and y in order to fit the neural network
+
+        :param X: _description_
+        :param y: _description_
+        :param learning_rate: _description_, defaults to 0.01
+        :param num_epochs: _description_, defaults to 100
+        :param batch_size: _description_, defaults to 32
+        """
+        dataset = TabularDataset(X, y)
+        loader = DataLoader(dataset, batch_size=batch_size)
+        self.instantiate_model(X, y)
+        self._fit(loader, learning_rate=learning_rate, num_epochs=num_epochs)
+
     def predict_proba(self, X):
+        """sklearn style predict_proba function
+
+        :param X: Features
+        :return: Predicted probability distribution
+        """
         self.eval()
         with torch.no_grad():
             logits = self.forward(torch.tensor(X, dtype=torch.float32))
@@ -95,29 +127,41 @@ class ClassifierModel(nn.Module):
         return probabilities.numpy()
 
     def predict(self, X):
+        """sklearn style predict function
+
+        :param X: Features
+        :return: Predicted class label
+        """
         probabilities = self.predict_proba(X)
         return np.argmax(probabilities, axis=1)
 
 
 class DyadRankingModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, num_classes):
+    """Simple neural network model for dyad ranking. Training data is assumed
+
+    :param nn: _description_
+    """
+
+    def __init__(self, num_classes):
         super(DyadRankingModel, self).__init__()
-        self.input = nn.Linear(input_dim, hidden_dim)
         self.num_classes = num_classes
 
-        # output dimension is always 1
+    def instantiate_model(self, X, y, hidden_dim=16):
+        self.input = nn.Linear(X.shape[1] + self.num_classes, hidden_dim)
+        # output dim is 1 in the dyad ranking case
         self.hidden = nn.Linear(hidden_dim, 1)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+        if not self.input:
+            raise NotFittedError()
+
         x = self.input(x)
         x = self.sigmoid(x)
         x = self.hidden(x)
         return x
 
-    def fit(self, train_loader, learning_rate=0.001, num_epochs=1000):
-        loss_fn = torch.nn.CrossEntropyLoss()
-
+    def _fit(self, train_loader, learning_rate=0.001, num_epochs=1000):
         optimizer = torch.optim.SGD(self.parameters(), lr=learning_rate)
 
         # optimization loop
@@ -127,29 +171,59 @@ class DyadRankingModel(nn.Module):
             for i, inputs in enumerate(train_loader):
                 optimizer.zero_grad()
                 outputs = self(inputs)
-
+                """The neural network models the log of the skill parameters of each alternative (dyad).
+                As we learn from pairwise comparisons, the following loss corresponds to the
+                negative log likelihood of the Bradley-Terry model https://en.wikipedia.org/wiki/Bradley%E2%80%93Terry_model
+                """
                 loss = (
                     torch.log(torch.exp(outputs[:, 0]) + torch.exp(outputs[:, 1]))
                     - outputs[:, 0]
-                )
-
-                # loss = loss_fn(outputs, labels)
+                ).mean()
                 loss.backward()
                 optimizer.step()
 
-    # def predict_proba(self, X):
-    #     self.eval()
-    #     with torch.no_grad():
-    #         logits = self.forward(torch.tensor(X, dtype=torch.float32))
-    #         probabilities = torch.softmax(logits, dim=1)
-    #     return probabilities.numpy()
+    def fit(
+        self,
+        X,
+        y,
+        num_classes=None,
+        learning_rate=0.001,
+        num_epochs=1000,
+        batch_size=32,
+    ):
+        """sklearn style fit function. Given classification data X and y, this first creates a
+        dataset with a dyad ranking reresentation and then fits the model.
+        The class labels are being one hot encoded.
+        CAUTION: Here, a batch has batch_size * (num_classes - 1) pairwise preferences, as
+        each example is transferred into (num_classes - 1) comaprisons
 
-    # def predict_class_label(self, X):
-    #     # create dyads
-    #     eye = torch.eye(self.num_classes)
-    #     eye = eye.repeat(X.)
-    #     x_long = x.
-    #     x_long.
+        :param train_loader: _description_
+        :param learning_rate: _description_, defaults to 0.001
+        :param num_epochs: _description_, defaults to 1000
+        """
+        if not num_classes:
+            num_classes = y.max() + 1
 
-    #     probabilities = self.predict_proba(X)
-    #     return np.argmax(probabilities, axis=1)
+        self.num_classes = num_classes
+        dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
+        loader = DataLoader(dyadic_dataset, batch_size=batch_size)
+        self.instantiate_model(X, y)
+        self._fit(loader, learning_rate=learning_rate, num_epochs=num_epochs)
+
+    def predict_classes(self, X):
+        """Convenience function that allows to use the ranker as an sklearn style classifier
+
+        :param X: Features
+        """
+        if not self.num_classes:
+            raise NotFittedError()
+        self.eval()
+        X = torch.tensor(X, dtype=torch.float32)
+        eye = torch.eye(self.num_classes)
+        eyes = eye.repeat((X.shape[0], 1))
+        Xs = X.repeat_interleave(self.num_classes, dim=0)
+        dyads = torch.cat([Xs, eyes], dim=1)
+        with torch.no_grad():
+            preds = self(dyads)
+            class_preds = preds.view(-1, self.num_classes).argmax(axis=1)
+        return class_preds.numpy()
