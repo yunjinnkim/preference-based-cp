@@ -94,7 +94,7 @@ class ClassifierModel(nn.Module):
                 loss.backward()
                 optimizer.step()
 
-    def fit(self, X, y, learning_rate=0.01, num_epochs=100, batch_size=32):
+    def fit(self, X, y, learning_rate=0.001, num_epochs=100, batch_size=32):
         """sklearn style function that takes X and y in order to fit the neural network
 
         :param X: _description_
@@ -174,7 +174,7 @@ class DyadRankingModel(nn.Module):
         y,
         num_classes=None,
         learning_rate=0.001,
-        num_epochs=1000,
+        num_epochs=100,
         batch_size=32,
     ):
         """sklearn style fit function. Given classification data X and y, this first creates a
