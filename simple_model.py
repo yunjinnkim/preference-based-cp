@@ -60,19 +60,13 @@ class DyadOneHotPairDataset(Dataset):
 class ClassifierModel(nn.Module):
     """Simple neural network for classification"""
 
-    def __init__(self, output_dim):
-        self.output_dim = output_dim
+    def __init__(self, input_dim, hidden_dim, output_dim):
         super(ClassifierModel, self).__init__()
-
-    def instantiate_model(self, X, y, hidden_dim=16):
-        self.input = nn.Linear(X.shape[1], hidden_dim)
-        self.hidden = nn.Linear(hidden_dim, self.output_dim)
+        self.input = nn.Linear(input_dim, hidden_dim)
+        self.hidden = nn.Linear(hidden_dim, output_dim)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if not self.input:
-            raise NotFittedError()
-
         x = self.input(x)
         x = self.sigmoid(x)
         x = self.hidden(x)
@@ -111,7 +105,6 @@ class ClassifierModel(nn.Module):
         """
         dataset = TabularDataset(X, y)
         loader = DataLoader(dataset, batch_size=batch_size)
-        self.instantiate_model(X, y)
         self._fit(loader, learning_rate=learning_rate, num_epochs=num_epochs)
 
     def predict_proba(self, X):
@@ -142,20 +135,13 @@ class DyadRankingModel(nn.Module):
     :param nn: _description_
     """
 
-    def __init__(self, num_classes):
+    def __init__(self, input_dim, hidden_dim):
         super(DyadRankingModel, self).__init__()
-        self.num_classes = num_classes
-
-    def instantiate_model(self, X, y, hidden_dim=16):
-        self.input = nn.Linear(X.shape[1] + self.num_classes, hidden_dim)
-        # output dim is 1 in the dyad ranking case
+        self.input = nn.Linear(input_dim, hidden_dim)
         self.hidden = nn.Linear(hidden_dim, 1)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if not self.input:
-            raise NotFittedError()
-
         x = self.input(x)
         x = self.sigmoid(x)
         x = self.hidden(x)
@@ -207,7 +193,6 @@ class DyadRankingModel(nn.Module):
         self.num_classes = num_classes
         dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
         loader = DataLoader(dyadic_dataset, batch_size=batch_size)
-        self.instantiate_model(X, y)
         self._fit(loader, learning_rate=learning_rate, num_epochs=num_epochs)
 
     def predict_classes(self, X):
