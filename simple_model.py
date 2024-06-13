@@ -81,7 +81,7 @@ class ClassifierModel(nn.Module):
         """
         loss_fn = torch.nn.CrossEntropyLoss()
 
-        optimizer = torch.optim.SGD(self.parameters(), lr=learning_rate)
+        optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
         # optimization loop
         for epoch in range(num_epochs):
@@ -148,7 +148,7 @@ class DyadRankingModel(nn.Module):
         return x
 
     def _fit(self, train_loader, learning_rate=0.001, num_epochs=100):
-        optimizer = torch.optim.SGD(self.parameters(), lr=learning_rate)
+        optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
         # optimization loop
         for epoch in range(num_epochs):
