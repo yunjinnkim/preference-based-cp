@@ -21,6 +21,23 @@ class TabularDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 
+def create_dyads(X, y, num_classes):
+    X = torch.tensor(X, dtype=torch.float32)
+    eye = torch.eye(num_classes)
+    y_oh = eye[y]
+    dyads = torch.cat([X, y_oh], dim=1)
+    return dyads
+
+
+def create_all_dyads(X, num_classes):
+    X = torch.tensor(X, dtype=torch.float32)
+    eye = torch.eye(num_classes)
+    eyes = eye.repeat((X.shape[0], 1))
+    Xs = X.repeat_interleave(num_classes, dim=0)
+    dyads = torch.cat([Xs, eyes], dim=1)
+    return dyads
+
+
 class DyadOneHotPairDataset(Dataset):
     """Given classificaiton data X,y, this generates a dataset of dyad pairs, where the class labels are one hot encoded and all possible preferences are present. The first alternative is the preferred one.
 
@@ -203,12 +220,22 @@ class DyadRankingModel(nn.Module):
         if not self.num_classes:
             raise NotFittedError()
         self.eval()
-        X = torch.tensor(X, dtype=torch.float32)
-        eye = torch.eye(self.num_classes)
-        eyes = eye.repeat((X.shape[0], 1))
-        Xs = X.repeat_interleave(self.num_classes, dim=0)
-        dyads = torch.cat([Xs, eyes], dim=1)
+        dyads = create_all_dyads(X, self.num_classes)
         with torch.no_grad():
             preds = self(dyads)
             class_preds = preds.view(-1, self.num_classes).argmax(axis=1)
-        return class_preds.numpy()
+        return class_preds.detach().numpy()
+
+    def predict_class_skills(self, X):
+        """Convenience function that allows to use the ranker as an sklearn style classifier
+
+        :param X: Features
+        """
+        if not self.num_classes:
+            raise NotFittedError()
+        self.eval()
+        dyads = create_all_dyads(X, self.num_classes)
+        with torch.no_grad():
+            skills = self(dyads)
+            class_skills = skills.view(-1, self.num_classes)
+        return class_skills.detach().numpy()
