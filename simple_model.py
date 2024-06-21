@@ -6,7 +6,7 @@ from sklearn.exceptions import NotFittedError
 from torch import nn
 
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, random_split
 
 
 class TabularDataset(Dataset):
@@ -89,16 +89,43 @@ class ClassifierModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, learning_rate=0.001, num_epochs=100):
+    def _fit(self, train_loader, val_loader, learning_rate=0.001, num_epochs=100):
         """Torch implementation for fitting the neural network
 
         :param train_loader: Loader for training data
-        :param learning_rate: Learning rate for the optimizer, defaults to 0.01
+        :param learning_rate: Learning rate for the optimizer, defaults to 0.001
         :param num_epochs: Number of epochs, defaults to 100
         """
-        loss_fn = torch.nn.CrossEntropyLoss()
 
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
+
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer, mode="min", factor=0.1, patience=10
+        )
+
+        loss_fn = nn.CrossEntropyLoss()
+
+        # Training loop
+        for epoch in range(num_epochs):
+            self.train()
+            for inputs, labels in train_loader:
+                optimizer.zero_grad()
+                outputs = self(inputs)
+                loss = loss_fn(outputs, labels)
+                loss.backward()
+                optimizer.step()
+
+            # Validation step
+            self.eval()
+            val_loss = 0
+            with torch.no_grad():
+                for val_inputs, val_labels in val_loader:
+                    val_outputs = self(val_inputs)
+                    val_loss += loss_fn(val_outputs, val_labels).item()
+            val_loss /= len(val_loader)
+
+            # Step the scheduler based on validation loss
+            scheduler.step(val_loss)
 
         # optimization loop
         for epoch in range(num_epochs):
@@ -111,7 +138,9 @@ class ClassifierModel(nn.Module):
                 loss.backward()
                 optimizer.step()
 
-    def fit(self, X, y, learning_rate=0.001, num_epochs=100, batch_size=32):
+    def fit(
+        self, X, y, learning_rate=0.001, num_epochs=100, batch_size=32, val_frac=0.2
+    ):
         """sklearn style function that takes X and y in order to fit the neural network
 
         :param X: _description_
@@ -121,8 +150,15 @@ class ClassifierModel(nn.Module):
         :param batch_size: _description_, defaults to 32
         """
         dataset = TabularDataset(X, y)
-        loader = DataLoader(dataset, batch_size=batch_size)
-        self._fit(loader, learning_rate=learning_rate, num_epochs=num_epochs)
+        train_dataset, val_dataset = random_split(dataset, [1 - val_frac, val_frac])
+        train_loader = DataLoader(train_dataset, batch_size=batch_size)
+        val_loader = DataLoader(val_dataset, batch_size=batch_size)
+        self._fit(
+            train_loader=train_loader,
+            val_loader=val_loader,
+            learning_rate=learning_rate,
+            num_epochs=num_epochs,
+        )
 
     def predict_proba(self, X):
         """sklearn style predict_proba function
@@ -164,35 +200,52 @@ class DyadRankingModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, learning_rate=0.001, num_epochs=100):
+    def _fit(self, train_loader, val_loader, learning_rate=0.001, num_epochs=100):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
-        # optimization loop
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer, mode="min", factor=0.1, patience=10
+        )
+
+        # Training loop
         for epoch in range(num_epochs):
             self.train()
-
-            for i, inputs in enumerate(train_loader):
+            for inputs in train_loader:
                 optimizer.zero_grad()
                 outputs = self(inputs)
-                """The neural network models the log of the skill parameters of each alternative (dyad).
-                As we learn from pairwise comparisons, the following loss corresponds to the
-                negative log likelihood of the Bradley-Terry model https://en.wikipedia.org/wiki/Bradley%E2%80%93Terry_model
-                """
                 loss = (
                     torch.log(torch.exp(outputs[:, 0]) + torch.exp(outputs[:, 1]))
                     - outputs[:, 0]
-                ).mean()
+                )
+                loss = loss.mean()
                 loss.backward()
                 optimizer.step()
+
+            # Validation step
+            self.eval()
+            val_loss = 0
+            with torch.no_grad():
+                for val_inputs in val_loader:
+                    val_outputs = self(val_inputs)
+                    loss = (
+                        torch.log(torch.exp(outputs[:, 0]) + torch.exp(outputs[:, 1]))
+                        - outputs[:, 0]
+                    ).mean()
+                    val_loss += loss.item()
+            val_loss /= len(val_loader)
+
+            # Step the scheduler based on validation loss
+            scheduler.step(val_loss)
 
     def fit(
         self,
         X,
         y,
-        num_classes=None,
-        learning_rate=0.001,
         num_epochs=100,
+        learning_rate=0.001,
+        num_classes=None,
         batch_size=32,
+        val_frac=0.2,
     ):
         """sklearn style fit function. Given classification data X and y, this first creates a
         dataset with a dyad ranking reresentation and then fits the model.
@@ -209,10 +262,19 @@ class DyadRankingModel(nn.Module):
 
         self.num_classes = num_classes
         dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
-        loader = DataLoader(dyadic_dataset, batch_size=batch_size)
-        self._fit(loader, learning_rate=learning_rate, num_epochs=num_epochs)
+        train_dataset, val_dataset = random_split(
+            dyadic_dataset, [1 - val_frac, val_frac]
+        )
+        train_loader = DataLoader(train_dataset, batch_size=batch_size)
+        val_loader = DataLoader(val_dataset, batch_size=batch_size)
+        self._fit(
+            train_loader=train_loader,
+            val_loader=val_loader,
+            learning_rate=learning_rate,
+            num_epochs=num_epochs,
+        )
 
-    def predict_classes(self, X):
+    def predict_class(self, X):
         """Convenience function that allows to use the ranker as an sklearn style classifier
 
         :param X: Features
