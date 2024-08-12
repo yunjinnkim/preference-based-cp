@@ -1,0 +1,42 @@
+PY_EXPERIMENTER:
+    n_jobs: 16
+
+    Database:
+      provider: sqlite
+      database: jonas_test
+      table:
+        name: cp_rank_dev
+        keyfields: 
+          model:
+            type: VARCHAR(255)
+            # values: ['plnet', 'classifier_nn', 'random_forest']
+            values: ['random_forest']
+          openml_id:
+            type: INTEGER
+            # values: [61, 187, 15, 31, 4534, 1461]
+            values: [61]
+          clf_seed:
+            type: INTEGER
+            values: [1]
+          mccv_split:
+            type: INTEGER
+            values: [1]
+          alpha:
+            type: FLOAT
+            # values: [0.05,0.1,0.2]
+            values: [0.05]
+          fraction_cal_samples:
+            type: FLOAT
+            # values: [0.1,0.2]
+            values: [0.1]
+
+
+        resultfields:
+          score_f1: Float 
+          score_acc: Float 
+          score_bacc: Float 
+          # score_roc_auc: Float 
+          coverage_mean: Float 
+          coverage_std: Float 
+          efficiency_mean: Float 
+          efficiency_std: Float 

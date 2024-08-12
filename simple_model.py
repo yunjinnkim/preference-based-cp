@@ -2,6 +2,7 @@ import torch
 import numpy as np
 
 from sklearn.exceptions import NotFittedError
+from sklearn.model_selection import train_test_split
 
 from torch import nn
 
@@ -301,3 +302,69 @@ class DyadRankingModel(nn.Module):
             skills = self(dyads)
             class_skills = skills.view(-1, self.num_classes)
         return class_skills.detach().numpy()
+
+
+class ConformalPredictor:
+
+    def __init__(self, model, alpha=0.05):
+        self.model = model
+        self.alpha = alpha
+
+    def fit(self, X, y, cal_size=0.33, random_state=None, **kwargs):
+        X_train, X_cal, y_train, y_cal = train_test_split(
+            X, y, test_size=cal_size, random_state=random_state
+        )
+        self.model.fit(X_train, y_train, **kwargs)
+        y_pred_cal = self.model.predict_proba(X_cal)
+        self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
+        n = len(self.scores)
+        self.threshold = np.quantile(
+            self.scores,
+            np.clip(np.ceil((n + 1) * (1 - self.alpha)) / n, 0, 1),
+            method="inverted_cdf",
+        )
+
+    def predict_set(self, X):
+        y_probas = self.model.predict_proba(X)
+        pred_sets = []
+        for y_proba in y_probas:
+            pred_set = np.where(1 - y_proba <= self.threshold)[0]
+            pred_sets.append(pred_set)
+        return pred_sets
+
+
+class ConformalRankingPredictor:
+    def __init__(self, num_classes, alpha=0.05):
+        self.num_classes = num_classes
+        self.alpha = 0.05
+
+    def fit(self, X, y, cal_size=0.33, hidden_dim=16, **kwargs):
+        X_train, X_cal, y_train, y_cal = train_test_split(X, y, test_size=cal_size)
+        self.model = DyadRankingModel(
+            input_dim=X_train.shape[1] + y.max() + 1, hidden_dim=16
+        )
+        self.model.fit(X_train, y_train, **kwargs)
+
+        # # here we typically compute non conformity scores. For the ranker
+        # # we use the predicted latent skill value
+
+        # y_pred_cal = self.model.predict_proba(X_cal)
+        # self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
+        cal_dyads = create_dyads(X_cal, y_cal, self.num_classes)
+        with torch.no_grad():
+            self.scores = self.model(cal_dyads).detach().numpy()
+        n = len(self.scores)
+        # TODO check alpha here
+        self.threshold = np.quantile(
+            self.scores, np.ceil((n + 1) * (self.alpha)) / n, method="inverted_cdf"
+        )
+
+    def predict_set(self, X):
+
+        y_skills = self.model.predict_class_skills(X)
+
+        pred_sets = []
+        for y_skill in y_skills:
+            pred_set = np.where(y_skill > self.threshold)[0]
+            pred_sets.append(pred_set)
+        return pred_sets
