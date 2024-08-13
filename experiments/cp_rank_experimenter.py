@@ -63,13 +63,17 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
         torch.cuda.manual_seed_all(clf_seed)
 
     dataset = openml.datasets.get_dataset(parameters["openml_id"])
-    X, y, _, _ = dataset.get_data(target=dataset.default_target_attribute)
+    X, y, _, _ = dataset.get_data(
+        target=dataset.default_target_attribute, dataset_format="dataframe"
+    )
 
     # Automatically identify categorical and numerical columns
     categorical_features = X.select_dtypes(
         include=["object", "category"]
     ).columns.tolist()
     numerical_features = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
+
+    num_classes = len(np.unique(y))
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=mccv_split
@@ -105,17 +109,23 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
         ]
     )
 
+    X_train = preprocessor.fit_transform(X_train)
+
     match parameters["model"]:
         # case "plnet":
         #     predictor = ConformalRankingPredictor(num_classes=y_train)
         case "random_forest":
             model = RandomForestClassifier(random_state=clf_seed)
             predictor = ConformalPredictor(model=model, alpha=parameters["alpha"])
-
-    X_train = preprocessor.fit_transform(X_train)
-
-    X_train = np.asarray(X_train)
-    y_train = np.asarray(y_train)
+        case "classifier_nn":
+            model = ClassifierModel(
+                input_dim=X_train.shape[1], hidden_dim=16, output_dim=num_classes
+            )
+            predictor = ConformalPredictor(model=model, alpha=parameters["alpha"])
+        case "plnet":
+            predictor = ConformalRankingPredictor(
+                num_classes=num_classes, alpha=parameters["alpha"], hidden_dim=16
+            )
 
     predictor.fit(
         X_train,
@@ -126,8 +136,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
     X_test = preprocessor.transform(X_test)
 
-    X_test = np.asarray(X_test)
-    y_test = np.asarray(y_test)
+    # X_test = X_test.to_numpy()
 
     y_pred_crisp = predictor.model.predict(X_test)
     y_pred_set = predictor.predict_set(X_test)
@@ -142,7 +151,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
     # Conformal prediction metrics
     hits = [y_test[i] in y_pred_set[i] for i in range(len(y_test))]
-    lens = [len(y_test[i]) for i in range(len(y_test))]
+    lens = [len(y_pred_set[i]) for i in range(len(y_test))]
     coverage_mean = np.mean(hits)
     coverage_std = np.std(hits)
     efficiency_mean = np.mean(lens)
@@ -178,4 +187,4 @@ if __name__ == "__main__":
 
     experimenter.fill_table_from_config()
 
-    experimenter.execute(max_experiments=1, experiment_function=worker)
+    experimenter.execute(max_experiments=-1, experiment_function=worker)

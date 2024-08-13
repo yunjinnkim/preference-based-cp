@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+import inspect
 
 from sklearn.exceptions import NotFittedError
 from sklearn.model_selection import train_test_split
@@ -90,11 +91,11 @@ class ClassifierModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, val_loader, learning_rate=0.001, num_epochs=100):
+    def _fit(self, train_loader, val_loader, learning_rate=0.01, num_epochs=100):
         """Torch implementation for fitting the neural network
 
         :param train_loader: Loader for training data
-        :param learning_rate: Learning rate for the optimizer, defaults to 0.001
+        :param learning_rate: Learning rate for the optimizer, defaults to 0.01
         :param num_epochs: Number of epochs, defaults to 100
         """
 
@@ -140,7 +141,14 @@ class ClassifierModel(nn.Module):
                 optimizer.step()
 
     def fit(
-        self, X, y, learning_rate=0.001, num_epochs=100, batch_size=32, val_frac=0.2
+        self,
+        X,
+        y,
+        learning_rate=0.01,
+        num_epochs=100,
+        batch_size=32,
+        val_frac=0.2,
+        random_state=None,
     ):
         """sklearn style function that takes X and y in order to fit the neural network
 
@@ -151,7 +159,10 @@ class ClassifierModel(nn.Module):
         :param batch_size: _description_, defaults to 32
         """
         dataset = TabularDataset(X, y)
-        train_dataset, val_dataset = random_split(dataset, [1 - val_frac, val_frac])
+        gen = torch.Generator().manual_seed(random_state)
+        train_dataset, val_dataset = random_split(
+            dataset, [1 - val_frac, val_frac], generator=gen
+        )
         train_loader = DataLoader(train_dataset, batch_size=batch_size)
         val_loader = DataLoader(val_dataset, batch_size=batch_size)
         self._fit(
@@ -201,7 +212,14 @@ class DyadRankingModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, val_loader, learning_rate=0.001, num_epochs=100):
+    def _fit(
+        self,
+        train_loader,
+        val_loader,
+        learning_rate=0.01,
+        num_epochs=100,
+        random_state=None,
+    ):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
@@ -228,11 +246,13 @@ class DyadRankingModel(nn.Module):
             with torch.no_grad():
                 for val_inputs in val_loader:
                     val_outputs = self(val_inputs)
-                    loss = (
-                        torch.log(torch.exp(outputs[:, 0]) + torch.exp(outputs[:, 1]))
-                        - outputs[:, 0]
+                    v_loss = (
+                        torch.log(
+                            torch.exp(val_outputs[:, 0]) + torch.exp(val_outputs[:, 1])
+                        )
+                        - val_outputs[:, 0]
                     ).mean()
-                    val_loss += loss.item()
+                    val_loss += v_loss.item()
             val_loss /= len(val_loader)
 
             # Step the scheduler based on validation loss
@@ -243,10 +263,11 @@ class DyadRankingModel(nn.Module):
         X,
         y,
         num_epochs=100,
-        learning_rate=0.001,
+        learning_rate=0.01,
         num_classes=None,
         batch_size=32,
         val_frac=0.2,
+        random_state=None,
     ):
         """sklearn style fit function. Given classification data X and y, this first creates a
         dataset with a dyad ranking reresentation and then fits the model.
@@ -255,7 +276,7 @@ class DyadRankingModel(nn.Module):
         each example is transferred into (num_classes - 1) comaprisons
 
         :param train_loader: _description_
-        :param learning_rate: _description_, defaults to 0.001
+        :param learning_rate: _description_, defaults to 0.01
         :param num_epochs: _description_, defaults to 1000
         """
         if not num_classes:
@@ -263,8 +284,10 @@ class DyadRankingModel(nn.Module):
 
         self.num_classes = num_classes
         dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
+        gen = torch.Generator().manual_seed(random_state)
+
         train_dataset, val_dataset = random_split(
-            dyadic_dataset, [1 - val_frac, val_frac]
+            dyadic_dataset, [1 - val_frac, val_frac], generator=gen
         )
         train_loader = DataLoader(train_dataset, batch_size=batch_size)
         val_loader = DataLoader(val_dataset, batch_size=batch_size)
@@ -273,9 +296,10 @@ class DyadRankingModel(nn.Module):
             val_loader=val_loader,
             learning_rate=learning_rate,
             num_epochs=num_epochs,
+            random_state=random_state,
         )
 
-    def predict_class(self, X):
+    def predict(self, X):
         """Convenience function that allows to use the ranker as an sklearn style classifier
 
         :param X: Features
@@ -314,7 +338,11 @@ class ConformalPredictor:
         X_train, X_cal, y_train, y_cal = train_test_split(
             X, y, test_size=cal_size, random_state=random_state
         )
-        self.model.fit(X_train, y_train, **kwargs)
+        params = inspect.signature(self.model.fit).parameters
+        if "random_state" in params:
+            self.model.fit(X_train, y_train, random_state=random_state, **kwargs)
+        else:
+            self.model.fit(X_train, y_train, **kwargs)
         y_pred_cal = self.model.predict_proba(X_cal)
         self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
         n = len(self.scores)
@@ -334,14 +362,15 @@ class ConformalPredictor:
 
 
 class ConformalRankingPredictor:
-    def __init__(self, num_classes, alpha=0.05):
+    def __init__(self, num_classes, alpha=0.05, hidden_dim=16):
         self.num_classes = num_classes
+        self.hidden_dim = hidden_dim
         self.alpha = 0.05
 
-    def fit(self, X, y, cal_size=0.33, hidden_dim=16, **kwargs):
+    def fit(self, X, y, cal_size=0.33, **kwargs):
         X_train, X_cal, y_train, y_cal = train_test_split(X, y, test_size=cal_size)
         self.model = DyadRankingModel(
-            input_dim=X_train.shape[1] + y.max() + 1, hidden_dim=16
+            input_dim=X_train.shape[1] + y.max() + 1, hidden_dim=self.hidden_dim
         )
         self.model.fit(X_train, y_train, **kwargs)
 

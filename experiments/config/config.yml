@@ -13,8 +13,8 @@ PY_EXPERIMENTER:
             values: ['random_forest']
           openml_id:
             type: INTEGER
-            # values: [61, 187, 15, 31, 4534, 1461]
-            values: [61]
+            values: [61, 187, 15, 31, 4534, 1461]
+            # values: [61]
           clf_seed:
             type: INTEGER
             values: [1]
