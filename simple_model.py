@@ -76,6 +76,51 @@ class DyadOneHotPairDataset(Dataset):
         return self.dyad_pairs[idx]
 
 
+class MCDyadOneHotPairDataset(Dataset):
+    """Given classificaiton data X,y, this generates a dataset of dyad pairs, where the class labels are one hot encoded and all possible preferences are present. The first alternative is the preferred one.
+
+    :param Dataset: _description_
+    """
+
+    def __init__(self, X, y, num_classes, num_data, random_state=0):
+        dyads_true = []
+        dyads_false = []
+        eye = torch.eye(num_classes)
+
+        for X_vec, label in zip(X, y):
+            dyads_true.append(
+                torch.hstack([torch.tensor(X_vec, dtype=torch.float32), eye[label]])
+            )
+            for k in range(0, num_classes):
+                if k == label:
+                    continue
+                dyads_false.append(
+                    torch.vstack(
+                        [
+                            torch.hstack(
+                                [torch.tensor(X_vec, dtype=torch.float32), eye[label]]
+                            ),
+                            torch.hstack(
+                                [torch.tensor(X_vec, dtype=torch.float32), eye[k]]
+                            ),
+                        ]
+                    )
+                )
+
+        indices = list()
+
+        for index in range(min(num_data, len(indices)):
+
+
+        self.dyad_pairs = torch.stack(dyad_pairs)
+
+    def __len__(self):
+        return len(self.dyad_pairs)
+
+    def __getitem__(self, idx):
+        return self.dyad_pairs[idx]
+
+
 class ClassifierModel(nn.Module):
     """Simple neural network for classification"""
 
@@ -280,7 +325,7 @@ class DyadRankingModel(nn.Module):
         :param num_epochs: _description_, defaults to 1000
         """
         if not num_classes:
-            num_classes = y.max() + 1
+            num_classes = len(np.unique(y))
 
         self.num_classes = num_classes
         dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
@@ -365,7 +410,7 @@ class ConformalRankingPredictor:
     def __init__(self, num_classes, alpha=0.05, hidden_dim=16):
         self.num_classes = num_classes
         self.hidden_dim = hidden_dim
-        self.alpha = 0.05
+        self.alpha = alpha
 
     def fit(self, X, y, cal_size=0.33, **kwargs):
         X_train, X_cal, y_train, y_cal = train_test_split(X, y, test_size=cal_size)
@@ -381,11 +426,13 @@ class ConformalRankingPredictor:
         # self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
         cal_dyads = create_dyads(X_cal, y_cal, self.num_classes)
         with torch.no_grad():
-            self.scores = self.model(cal_dyads).detach().numpy()
+            self.scores = -self.model(cal_dyads).detach().numpy()
         n = len(self.scores)
         # TODO check alpha here
         self.threshold = np.quantile(
-            self.scores, np.ceil((n + 1) * (self.alpha)) / n, method="inverted_cdf"
+            self.scores,
+            np.clip(np.ceil((n + 1) * (1 - self.alpha)) / n, 0, 1),
+            method="inverted_cdf",
         )
 
     def predict_set(self, X):
@@ -394,6 +441,6 @@ class ConformalRankingPredictor:
 
         pred_sets = []
         for y_skill in y_skills:
-            pred_set = np.where(y_skill > self.threshold)[0]
+            pred_set = np.where(-y_skill <= self.threshold)[0]
             pred_sets.append(pred_set)
         return pred_sets
