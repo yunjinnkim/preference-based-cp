@@ -1,17 +1,32 @@
+import joblib
+
+joblib.parallel_config(backend="multiprocessing")
+
+import joblib._store_backends
+import sys
+
+sys.path.insert(0, "/dss/dsshome1/04/ra43rid2/rank_cp/")
+
 import random
 import numpy as np
 import torch
 import openml
 import mysql.connector
-
 import types
+
+import random
 from py_experimenter.experimenter import PyExperimenter
 from py_experimenter.result_processor import ResultProcessor
 from sklearn.model_selection import train_test_split
 from simple_model import ConformalRankingPredictor, ConformalPredictor, ClassifierModel
 from sklearn.preprocessing import LabelEncoder
 
-from py_experimenter.database_connector_mysql import DatabaseConnectorMYSQL
+from math import ceil, log2
+
+from py_experimenter.database_connector_mysql import (
+    DatabaseConnectorMYSQL,
+    DatabaseConnector,
+)
 
 
 # def connect(self):
@@ -20,7 +35,7 @@ from py_experimenter.database_connector_mysql import DatabaseConnectorMYSQL
 #         host="xxx",
 #         user="xxx",
 #         password="xxx",
-#         database="jonas_test",
+#         database="xxx",
 #         ssl_disabled=False,
 #     )
 #     return db
@@ -52,8 +67,12 @@ from sklearn.metrics import (
 
 
 def worker(parameters: dict, result_processor: ResultProcessor, custom_config: dict):
-    mccv_split = parameters["mccv_split"]
-    clf_seed = parameters["clf_seed"]
+
+    master_seed = parameters["master_seed"]
+    rng = random.Random(master_seed)
+    mccv_split_seed = rng.randint(0, 2**32 - 1)
+    clf_seed = rng.randint(0, 2**32 - 1)
+
     random.seed(clf_seed)
     np.random.seed(clf_seed)
     torch.manual_seed(clf_seed)
@@ -76,7 +95,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
     num_classes = len(np.unique(y))
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=mccv_split
+        X, y, test_size=0.2, random_state=mccv_split_seed
     )
 
     # Encode labels
@@ -111,6 +130,11 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
     X_train = preprocessor.fit_transform(X_train)
 
+    if not isinstance(X_train, np.ndarray):
+        X_train = X_train.toarray()
+    if not isinstance(y_train, np.ndarray):
+        y_train = y_train.toarray()
+
     match parameters["model"]:
         # case "plnet":
         #     predictor = ConformalRankingPredictor(num_classes=y_train)
@@ -126,17 +150,35 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             predictor = ConformalRankingPredictor(
                 num_classes=num_classes, alpha=parameters["alpha"], hidden_dim=16
             )
+        case "plnet_cross_instance":
+            predictor = ConformalRankingPredictor(
+                num_classes=num_classes, alpha=parameters["alpha"], hidden_dim=16
+            )
 
-    predictor.fit(
-        X_train,
-        y_train,
-        cal_size=parameters["fraction_cal_samples"],
-        random_state=clf_seed,
-    )
+    if parameters["model"] == "plnet_cross_instance":
+        predictor.fit(
+            X_train,
+            y_train,
+            cal_size=parameters["fraction_cal_samples"],
+            random_state=clf_seed,
+            use_cross_isntance_data=True,
+            num_pairs=len(X_train) * num_classes * ceil(log2(len(X_train))),
+        )
+    else:
+        predictor.fit(
+            X_train,
+            y_train,
+            cal_size=parameters["fraction_cal_samples"],
+            random_state=clf_seed,
+        )
 
     X_test = preprocessor.transform(X_test)
 
     # X_test = X_test.to_numpy()
+    if not isinstance(X_test, np.ndarray):
+        X_test = X_test.toarray()
+    if not isinstance(y_test, np.ndarray):
+        y_test = y_test.toarray()
 
     y_pred_crisp = predictor.model.predict(X_test)
     y_pred_set = predictor.predict_set(X_test)
@@ -167,14 +209,18 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             "coverage_std": coverage_std,
             "efficiency_mean": efficiency_mean,
             "efficiency_std": efficiency_std,
+            "clf_seed": clf_seed,
+            "mccv_seed": mccv_split_seed,
         }
     )
 
 
 if __name__ == "__main__":
 
+    print(sys.version)
+
     experimenter = PyExperimenter(
-        experiment_configuration_file_path="./experiments/config/config.yml"
+        experiment_configuration_file_path="./config/config.yml"
     )
 
     # experimenter.db_connector.connect = types.MethodType(

@@ -1,11 +1,17 @@
-import torch
 import numpy as np
-import inspect
+import torch
 
 from sklearn.exceptions import NotFittedError
 from sklearn.model_selection import train_test_split
 
 from torch import nn
+
+import inspect
+
+
+import random
+
+from itertools import product
 
 import torch
 from torch.utils.data import Dataset, DataLoader, random_split
@@ -82,7 +88,7 @@ class MCDyadOneHotPairDataset(Dataset):
     :param Dataset: _description_
     """
 
-    def __init__(self, X, y, num_classes, num_data, random_state=0):
+    def __init__(self, X, y, num_classes, random_state=0, num_pairs=-1):
         dyads_true = []
         dyads_false = []
         eye = torch.eye(num_classes)
@@ -92,25 +98,21 @@ class MCDyadOneHotPairDataset(Dataset):
                 torch.hstack([torch.tensor(X_vec, dtype=torch.float32), eye[label]])
             )
             for k in range(0, num_classes):
-                if k == label:
-                    continue
-                dyads_false.append(
-                    torch.vstack(
-                        [
-                            torch.hstack(
-                                [torch.tensor(X_vec, dtype=torch.float32), eye[label]]
-                            ),
-                            torch.hstack(
-                                [torch.tensor(X_vec, dtype=torch.float32), eye[k]]
-                            ),
-                        ]
+                if k != label:
+                    dyads_false.append(
+                        torch.hstack([torch.tensor(X_vec, dtype=torch.float32), eye[k]])
                     )
-                )
 
-        indices = list()
-
-        for index in range(min(num_data, len(indices)):
-
+        indices_true = range(len(dyads_true))
+        indices_false = range(len(dyads_false))
+        indices = list(product(list(indices_true), list(indices_false)))
+        random.Random(random_state).shuffle(indices)
+        dyad_pairs = []
+        print(indices)
+        for index in indices[:num_pairs]:
+            dyad_pairs.append(
+                torch.vstack([dyads_true[index[0]], dyads_false[index[1]]])
+            )
 
         self.dyad_pairs = torch.stack(dyad_pairs)
 
@@ -313,6 +315,8 @@ class DyadRankingModel(nn.Module):
         batch_size=32,
         val_frac=0.2,
         random_state=None,
+        use_cross_instance_dataset=False,
+        num_pairs=-1,
     ):
         """sklearn style fit function. Given classification data X and y, this first creates a
         dataset with a dyad ranking reresentation and then fits the model.
@@ -328,7 +332,16 @@ class DyadRankingModel(nn.Module):
             num_classes = len(np.unique(y))
 
         self.num_classes = num_classes
-        dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
+        if use_cross_instance_dataset:
+            dyadic_dataset = MCDyadOneHotPairDataset(
+                X,
+                y,
+                num_classes=self.num_classes,
+                random_state=random_state,
+                num_pairs=num_pairs,
+            )
+        else:
+            dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
         gen = torch.Generator().manual_seed(random_state)
 
         train_dataset, val_dataset = random_split(
@@ -407,17 +420,38 @@ class ConformalPredictor:
 
 
 class ConformalRankingPredictor:
-    def __init__(self, num_classes, alpha=0.05, hidden_dim=16):
+    def __init__(
+        self,
+        num_classes,
+        alpha=0.05,
+        hidden_dim=16,
+    ):
         self.num_classes = num_classes
         self.hidden_dim = hidden_dim
         self.alpha = alpha
 
-    def fit(self, X, y, cal_size=0.33, **kwargs):
+    def fit(
+        self,
+        X,
+        y,
+        random_state,
+        cal_size=0.33,
+        use_cross_isntance_data=False,
+        num_pairs=-1,
+        **kwargs
+    ):
         X_train, X_cal, y_train, y_cal = train_test_split(X, y, test_size=cal_size)
         self.model = DyadRankingModel(
             input_dim=X_train.shape[1] + y.max() + 1, hidden_dim=self.hidden_dim
         )
-        self.model.fit(X_train, y_train, **kwargs)
+        self.model.fit(
+            X_train,
+            y_train,
+            use_cross_instance_dataset=use_cross_isntance_data,
+            num_pairs=num_pairs,
+            random_state=random_state,
+            **kwargs,
+        )
 
         # # here we typically compute non conformity scores. For the ranker
         # # we use the predicted latent skill value
