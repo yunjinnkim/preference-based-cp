@@ -162,7 +162,8 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             cal_size=parameters["fraction_cal_samples"],
             random_state=clf_seed,
             use_cross_isntance_data=True,
-            num_pairs=len(X_train) * num_classes * ceil(log2(len(X_train))),
+            num_pairs=-1,
+            # num_pairs=len(X_train) * num_classes * ceil(log2(len(X_train))),
         )
     else:
         predictor.fit(
@@ -233,4 +234,4 @@ if __name__ == "__main__":
 
     experimenter.fill_table_from_config()
 
-    experimenter.execute(max_experiments=-1, experiment_function=worker)
+    experimenter.execute(max_experiments=1, experiment_function=worker)

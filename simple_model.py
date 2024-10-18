@@ -108,7 +108,6 @@ class MCDyadOneHotPairDataset(Dataset):
         indices = list(product(list(indices_true), list(indices_false)))
         random.Random(random_state).shuffle(indices)
         dyad_pairs = []
-        print(indices)
         for index in indices[:num_pairs]:
             dyad_pairs.append(
                 torch.vstack([dyads_true[index[0]], dyads_false[index[1]]])
@@ -123,6 +122,29 @@ class MCDyadOneHotPairDataset(Dataset):
         return self.dyad_pairs[idx]
 
 
+class EarlyStopping:
+    def __init__(self, patience=5, delta=0, verbose=False):
+        self.patience = patience
+        self.delta = delta
+        self.verbose = verbose
+        self.best_loss = float("inf")
+        self.counter = 0
+        self.early_stop = False
+
+    def __call__(self, val_loss):
+        if val_loss < self.best_loss - self.delta:
+            self.best_loss = val_loss
+            self.counter = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                if self.verbose:
+                    print(
+                        f"Early stopping triggered. Best validation loss: {self.best_loss:.4f}"
+                    )
+                self.early_stop = True
+
+
 class ClassifierModel(nn.Module):
     """Simple neural network for classification"""
 
@@ -131,6 +153,8 @@ class ClassifierModel(nn.Module):
         self.input = nn.Linear(input_dim, hidden_dim)
         self.hidden = nn.Linear(hidden_dim, output_dim)
         self.sigmoid = nn.Sigmoid()
+        self.effective_epochs = 0
+        self.gradient_updates = 0
 
     def forward(self, x):
         x = self.input(x)
@@ -138,7 +162,15 @@ class ClassifierModel(nn.Module):
         x = self.hidden(x)
         return x
 
-    def _fit(self, train_loader, val_loader, learning_rate=0.01, num_epochs=100):
+    def _fit(
+        self,
+        train_loader,
+        val_loader,
+        learning_rate=0.01,
+        num_epochs=100,
+        patience=5,
+        delta=0.0,
+    ):
         """Torch implementation for fitting the neural network
 
         :param train_loader: Loader for training data
@@ -153,6 +185,10 @@ class ClassifierModel(nn.Module):
         )
 
         loss_fn = nn.CrossEntropyLoss()
+        early_stopping = EarlyStopping(patience=patience, delta=delta)
+
+        self.effective_epochs = 0
+        self.gradient_updates = 0
 
         # Training loop
         for epoch in range(num_epochs):
@@ -163,7 +199,7 @@ class ClassifierModel(nn.Module):
                 loss = loss_fn(outputs, labels)
                 loss.backward()
                 optimizer.step()
-
+                self.gradient_updates += 1
             # Validation step
             self.eval()
             val_loss = 0
@@ -175,17 +211,11 @@ class ClassifierModel(nn.Module):
 
             # Step the scheduler based on validation loss
             scheduler.step(val_loss)
-
-        # optimization loop
-        for epoch in range(num_epochs):
-            self.train()
-
-            for i, (inputs, labels) in enumerate(train_loader):
-                optimizer.zero_grad()
-                outputs = self(inputs)
-                loss = loss_fn(outputs, labels)
-                loss.backward()
-                optimizer.step()
+            self.effective_epochs += 1
+            early_stopping(val_loss)
+            if early_stopping.early_stop:
+                print("Stopping training.")
+                break
 
     def fit(
         self,
@@ -195,7 +225,9 @@ class ClassifierModel(nn.Module):
         num_epochs=100,
         batch_size=32,
         val_frac=0.2,
-        random_state=None,
+        random_state=0,
+        patience=5,
+        delta=0,
     ):
         """sklearn style function that takes X and y in order to fit the neural network
 
@@ -217,6 +249,8 @@ class ClassifierModel(nn.Module):
             val_loader=val_loader,
             learning_rate=learning_rate,
             num_epochs=num_epochs,
+            patience=patience,
+            delta=delta,
         )
 
     def predict_proba(self, X):
@@ -252,6 +286,8 @@ class DyadRankingModel(nn.Module):
         self.input = nn.Linear(input_dim, hidden_dim)
         self.hidden = nn.Linear(hidden_dim, 1)
         self.sigmoid = nn.Sigmoid()
+        self.effective_epochs = 0
+        self.gradient_updates = 0
 
     def forward(self, x):
         x = self.input(x)
@@ -266,12 +302,19 @@ class DyadRankingModel(nn.Module):
         learning_rate=0.01,
         num_epochs=100,
         random_state=None,
+        patience=5,
+        delta=0.0,
     ):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer, mode="min", factor=0.1, patience=10
         )
+
+        self.effective_epochs = 0
+        self.gradient_updates = 0
+
+        early_stopping = EarlyStopping(patience=patience, delta=delta)
 
         # Training loop
         for epoch in range(num_epochs):
@@ -286,6 +329,7 @@ class DyadRankingModel(nn.Module):
                 loss = loss.mean()
                 loss.backward()
                 optimizer.step()
+                self.gradient_updates += 1
 
             # Validation step
             self.eval()
@@ -304,6 +348,11 @@ class DyadRankingModel(nn.Module):
 
             # Step the scheduler based on validation loss
             scheduler.step(val_loss)
+            self.effective_epochs += 1
+            early_stopping(val_loss)
+            if early_stopping.early_stop:
+                print("Stopping training.")
+                break
 
     def fit(
         self,
@@ -317,6 +366,8 @@ class DyadRankingModel(nn.Module):
         random_state=None,
         use_cross_instance_dataset=False,
         num_pairs=-1,
+        patience=5,
+        delta=0,
     ):
         """sklearn style fit function. Given classification data X and y, this first creates a
         dataset with a dyad ranking reresentation and then fits the model.
@@ -355,6 +406,8 @@ class DyadRankingModel(nn.Module):
             learning_rate=learning_rate,
             num_epochs=num_epochs,
             random_state=random_state,
+            patience=patience,
+            delta=delta,
         )
 
     def predict(self, X):
@@ -435,10 +488,11 @@ class ConformalRankingPredictor:
         X,
         y,
         random_state,
+        num_epochs=100,
         cal_size=0.33,
         use_cross_isntance_data=False,
         num_pairs=-1,
-        **kwargs
+        **kwargs,
     ):
         X_train, X_cal, y_train, y_cal = train_test_split(X, y, test_size=cal_size)
         self.model = DyadRankingModel(
@@ -450,11 +504,12 @@ class ConformalRankingPredictor:
             use_cross_instance_dataset=use_cross_isntance_data,
             num_pairs=num_pairs,
             random_state=random_state,
+            num_epochs=num_epochs,
             **kwargs,
         )
 
-        # # here we typically compute non conformity scores. For the ranker
-        # # we use the predicted latent skill value
+        # here we usually compute non conformity scores. For the ranker
+        # we use the predicted latent skill value
 
         # y_pred_cal = self.model.predict_proba(X_cal)
         # self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
