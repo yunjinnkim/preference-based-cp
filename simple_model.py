@@ -190,16 +190,23 @@ class ClassifierModel(nn.Module):
         self.effective_epochs = 0
         self.gradient_updates = 0
 
+        self.train_losses = []
+        self.val_losses = []
+
+
         # Training loop
         for epoch in range(num_epochs):
+            train_loss = 0
             self.train()
             for inputs, labels in train_loader:
                 optimizer.zero_grad()
                 outputs = self(inputs)
                 loss = loss_fn(outputs, labels)
+                train_loss += loss_fn(outputs,labels).item()
                 loss.backward()
                 optimizer.step()
                 self.gradient_updates += 1
+            train_loss /= len(train_loader)
             # Validation step
             self.eval()
             val_loss = 0
@@ -208,6 +215,9 @@ class ClassifierModel(nn.Module):
                     val_outputs = self(val_inputs)
                     val_loss += loss_fn(val_outputs, val_labels).item()
             val_loss /= len(val_loader)
+
+            self.train_losses.append(train_loss)
+            self.val_losses.append(val_loss)
 
             # Step the scheduler based on validation loss
             scheduler.step(val_loss)
@@ -238,7 +248,7 @@ class ClassifierModel(nn.Module):
         :param batch_size: _description_, defaults to 32
         """
         dataset = TabularDataset(X, y)
-        gen = torch.Generator().manual_seed(random_state)
+        gen = torch.Generator(device=torch.get_default_device()).manual_seed(random_state)
         train_dataset, val_dataset = random_split(
             dataset, [1 - val_frac, val_frac], generator=gen
         )
@@ -263,7 +273,7 @@ class ClassifierModel(nn.Module):
         with torch.no_grad():
             logits = self.forward(torch.tensor(X, dtype=torch.float32))
             probabilities = torch.softmax(logits, dim=1)
-        return probabilities.numpy()
+        return probabilities.detach().cpu().numpy()
 
     def predict(self, X):
         """sklearn style predict function
@@ -314,11 +324,15 @@ class DyadRankingModel(nn.Module):
         self.effective_epochs = 0
         self.gradient_updates = 0
 
+        self.train_losses = []
+        self.val_losses = []
+
         early_stopping = EarlyStopping(patience=patience, delta=delta)
 
         # Training loop
         for epoch in range(num_epochs):
             self.train()
+            train_loss = 0
             for inputs in train_loader:
                 optimizer.zero_grad()
                 outputs = self(inputs)
@@ -327,9 +341,11 @@ class DyadRankingModel(nn.Module):
                     - outputs[:, 0]
                 )
                 loss = loss.mean()
+                train_loss += loss.item()
                 loss.backward()
                 optimizer.step()
                 self.gradient_updates += 1
+            train_loss /= len(train_loader)
 
             # Validation step
             self.eval()
@@ -345,6 +361,9 @@ class DyadRankingModel(nn.Module):
                     ).mean()
                     val_loss += v_loss.item()
             val_loss /= len(val_loader)
+
+            self.train_losses.append(train_loss)
+            self.val_losses.append(val_loss)
 
             # Step the scheduler based on validation loss
             scheduler.step(val_loss)
@@ -393,7 +412,7 @@ class DyadRankingModel(nn.Module):
             )
         else:
             dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
-        gen = torch.Generator().manual_seed(random_state)
+        gen = torch.Generator(device=torch.get_default_device()).manual_seed(random_state)
 
         train_dataset, val_dataset = random_split(
             dyadic_dataset, [1 - val_frac, val_frac], generator=gen
@@ -422,7 +441,7 @@ class DyadRankingModel(nn.Module):
         with torch.no_grad():
             preds = self(dyads)
             class_preds = preds.view(-1, self.num_classes).argmax(axis=1)
-        return class_preds.detach().numpy()
+        return class_preds.detach().cpu().numpy()
 
     def predict_class_skills(self, X):
         """Convenience function that allows to use the ranker as an sklearn style classifier
@@ -436,7 +455,7 @@ class DyadRankingModel(nn.Module):
         with torch.no_grad():
             skills = self(dyads)
             class_skills = skills.view(-1, self.num_classes)
-        return class_skills.detach().numpy()
+        return class_skills.detach().cpu().numpy()
 
 
 class ConformalPredictor:
@@ -515,7 +534,7 @@ class ConformalRankingPredictor:
         # self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
         cal_dyads = create_dyads(X_cal, y_cal, self.num_classes)
         with torch.no_grad():
-            self.scores = -self.model(cal_dyads).detach().numpy()
+            self.scores = -self.model(cal_dyads).detach().cpu().numpy()
         n = len(self.scores)
         # TODO check alpha here
         self.threshold = np.quantile(
