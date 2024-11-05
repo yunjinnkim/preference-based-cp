@@ -193,7 +193,6 @@ class ClassifierModel(nn.Module):
         self.train_losses = []
         self.val_losses = []
 
-
         # Training loop
         for epoch in range(num_epochs):
             train_loss = 0
@@ -202,7 +201,7 @@ class ClassifierModel(nn.Module):
                 optimizer.zero_grad()
                 outputs = self(inputs)
                 loss = loss_fn(outputs, labels)
-                train_loss += loss_fn(outputs,labels).item()
+                train_loss += loss_fn(outputs, labels).item()
                 loss.backward()
                 optimizer.step()
                 self.gradient_updates += 1
@@ -248,7 +247,9 @@ class ClassifierModel(nn.Module):
         :param batch_size: _description_, defaults to 32
         """
         dataset = TabularDataset(X, y)
-        gen = torch.Generator(device=torch.get_default_device()).manual_seed(random_state)
+        gen = torch.Generator(device=torch.get_default_device()).manual_seed(
+            random_state
+        )
         train_dataset, val_dataset = random_split(
             dataset, [1 - val_frac, val_frac], generator=gen
         )
@@ -412,7 +413,9 @@ class DyadRankingModel(nn.Module):
             )
         else:
             dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
-        gen = torch.Generator(device=torch.get_default_device()).manual_seed(random_state)
+        gen = torch.Generator(device=torch.get_default_device()).manual_seed(
+            random_state
+        )
 
         train_dataset, val_dataset = random_split(
             dyadic_dataset, [1 - val_frac, val_frac], generator=gen
