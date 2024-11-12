@@ -1,0 +1,928 @@
+2024-08-07 16:52:10,392  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 16:52:10,392  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 16:52:10,392  | py-experimenter - WARNING  | No logtables given
+2024-08-07 16:52:10,392  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 16:52:10,392  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 16:52:31,876  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 16:52:31,876  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 16:52:31,876  | py-experimenter - WARNING  | No logtables given
+2024-08-07 16:52:31,876  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 16:52:31,876  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 16:53:34,818  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 16:53:34,818  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 16:53:34,819  | py-experimenter - WARNING  | No logtables given
+2024-08-07 16:53:34,819  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 16:53:34,819  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 16:56:05,662  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 16:56:05,662  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 16:56:05,662  | py-experimenter - WARNING  | No logtables given
+2024-08-07 16:56:05,662  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 16:56:05,662  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 16:56:05,685  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-07 16:59:54,713  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 16:59:54,714  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 16:59:54,714  | py-experimenter - WARNING  | No logtables given
+2024-08-07 16:59:54,714  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 16:59:54,714  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 16:59:54,732  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-07 16:59:54,799  | py-experimenter - INFO     | 12 rows successfully added to database. 0 rows were skipped.
+2024-08-07 17:24:19,197  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 17:24:19,197  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 17:24:19,198  | py-experimenter - WARNING  | No logtables given
+2024-08-07 17:24:19,198  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 17:24:19,198  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 17:24:19,208  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-07 17:24:19,223  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-07 17:27:42,467  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 17:27:42,468  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 17:27:42,468  | py-experimenter - WARNING  | No logtables given
+2024-08-07 17:27:42,468  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 17:27:42,469  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 17:27:42,491  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-07 17:27:42,523  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-07 17:28:13,216  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 17:28:13,217  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 17:28:13,217  | py-experimenter - WARNING  | No logtables given
+2024-08-07 17:28:13,217  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 17:28:13,217  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 17:28:13,232  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-07 17:28:13,257  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-07 17:29:46,106  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-07 17:29:46,106  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-07 17:29:46,106  | py-experimenter - WARNING  | No logtables given
+2024-08-07 17:29:46,106  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-07 17:29:46,106  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-07 17:29:46,120  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-07 17:29:46,141  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-08 13:26:21,238  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-08 13:26:21,239  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-08 13:26:21,239  | py-experimenter - WARNING  | No logtables given
+2024-08-08 13:26:21,239  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-08 13:26:21,239  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:20:00,812  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-09 14:20:00,822  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 14:20:00,822  | py-experimenter - WARNING  | No logtables given
+2024-08-09 14:20:00,823  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 14:20:00,823  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:20:11,054  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-09 14:20:11,055  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 14:20:11,055  | py-experimenter - WARNING  | No logtables given
+2024-08-09 14:20:11,055  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 14:20:11,055  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:24:30,221  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-09 14:24:30,221  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 14:24:30,221  | py-experimenter - WARNING  | No logtables given
+2024-08-09 14:24:30,221  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 14:24:30,222  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:25:20,637  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-09 14:25:20,637  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 14:25:20,637  | py-experimenter - WARNING  | No logtables given
+2024-08-09 14:25:20,637  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 14:25:20,637  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:25:20,647  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 14:26:04,142  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-09 14:26:04,142  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 14:26:04,142  | py-experimenter - WARNING  | No logtables given
+2024-08-09 14:26:04,142  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 14:26:04,142  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:26:04,143  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 14:26:04,195  | py-experimenter - INFO     | 12 rows successfully added to database. 0 rows were skipped.
+2024-08-09 14:26:13,896  | py-experimenter - INFO     | All configured executions finished.
+2024-08-09 14:53:44,320  | py-experimenter - INFO     | Found 4 keyfields
+2024-08-09 14:53:44,320  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 14:53:44,320  | py-experimenter - WARNING  | No logtables given
+2024-08-09 14:53:44,320  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 14:53:44,320  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 14:53:44,320  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 14:53:44,321  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-09 14:53:58,638  | py-experimenter - INFO     | All configured executions finished.
+2024-08-09 15:19:10,535  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-09 15:19:10,536  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 15:19:10,537  | py-experimenter - WARNING  | No logtables given
+2024-08-09 15:19:10,538  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 15:19:10,538  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 15:19:10,540  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 15:19:10,587  | py-experimenter - INFO     | 12 rows successfully added to database. 0 rows were skipped.
+2024-08-09 15:19:35,223  | py-experimenter - INFO     | All configured executions finished.
+2024-08-09 15:20:04,260  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-09 15:20:04,260  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 15:20:04,260  | py-experimenter - WARNING  | No logtables given
+2024-08-09 15:20:04,260  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 15:20:04,260  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 15:20:04,261  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 15:20:04,262  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-09 15:31:13,878  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-09 15:31:13,878  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 15:31:13,878  | py-experimenter - WARNING  | No logtables given
+2024-08-09 15:31:13,878  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 15:31:13,878  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 15:31:13,878  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 15:31:13,879  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-09 15:31:49,806  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-09 15:31:49,806  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 15:31:49,806  | py-experimenter - WARNING  | No logtables given
+2024-08-09 15:31:49,806  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 15:31:49,806  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 15:31:49,806  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 15:31:49,858  | py-experimenter - INFO     | 12 rows successfully added to database. 0 rows were skipped.
+2024-08-09 15:31:55,872  | py-experimenter - INFO     | All configured executions finished.
+2024-08-09 15:34:35,142  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-09 15:34:35,142  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 15:34:35,142  | py-experimenter - WARNING  | No logtables given
+2024-08-09 15:34:35,142  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 15:34:35,142  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 15:34:35,142  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 15:34:35,143  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-09 15:34:41,138  | py-experimenter - INFO     | All configured executions finished.
+2024-08-09 15:35:31,729  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-09 15:35:31,730  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-09 15:35:31,730  | py-experimenter - WARNING  | No logtables given
+2024-08-09 15:35:31,730  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-09 15:35:31,730  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-09 15:35:31,730  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-09 15:35:31,731  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-09 15:35:38,551  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 09:30:12,137  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-12 09:30:12,137  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-12 09:30:12,137  | py-experimenter - WARNING  | No logtables given
+2024-08-12 09:30:12,137  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 09:30:12,137  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 09:30:12,137  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 09:30:12,138  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-12 09:30:18,730  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 09:36:38,300  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-12 09:36:38,300  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-12 09:36:38,300  | py-experimenter - WARNING  | No logtables given
+2024-08-12 09:36:38,301  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 09:36:38,301  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 09:36:38,301  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 09:36:38,301  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-12 09:36:44,382  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 09:47:51,343  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-12 09:47:51,344  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-12 09:47:51,344  | py-experimenter - WARNING  | No logtables given
+2024-08-12 09:47:51,344  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 09:47:51,344  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 09:47:51,344  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 09:47:51,344  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-12 09:47:57,372  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 09:48:51,065  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-12 09:48:51,065  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-12 09:48:51,065  | py-experimenter - WARNING  | No logtables given
+2024-08-12 09:48:51,065  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 09:48:51,065  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 09:48:51,066  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 09:48:51,067  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-12 09:48:58,728  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 09:49:13,764  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-12 09:49:13,764  | py-experimenter - INFO     | Found 3 resultfields
+2024-08-12 09:49:13,764  | py-experimenter - WARNING  | No logtables given
+2024-08-12 09:49:13,764  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 09:49:13,764  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 09:49:13,764  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 09:49:13,765  | py-experimenter - INFO     | No rows to add. All the 12 experiments already exist.
+2024-08-12 09:49:21,659  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 15:38:15,686  | py-experimenter - INFO     | Found 6 keyfields
+2024-08-12 15:38:15,686  | py-experimenter - INFO     | Found 8 resultfields
+2024-08-12 15:38:15,686  | py-experimenter - WARNING  | No logtables given
+2024-08-12 15:38:15,686  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 15:38:15,687  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 15:38:15,687  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 15:38:15,738  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2024-08-12 15:38:21,981  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 16:42:28,199  | py-experimenter - INFO     | Found 6 keyfields
+2024-08-12 16:42:28,200  | py-experimenter - INFO     | Found 8 resultfields
+2024-08-12 16:42:28,200  | py-experimenter - WARNING  | No logtables given
+2024-08-12 16:42:28,200  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 16:42:28,200  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 16:42:28,200  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 16:42:28,201  | py-experimenter - INFO     | No rows to add. All the 1 experiments already exist.
+2024-08-12 16:42:54,535  | py-experimenter - INFO     | Found 6 keyfields
+2024-08-12 16:42:54,535  | py-experimenter - INFO     | Found 8 resultfields
+2024-08-12 16:42:54,535  | py-experimenter - WARNING  | No logtables given
+2024-08-12 16:42:54,535  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 16:42:54,535  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 16:42:54,536  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 16:42:54,588  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2024-08-12 16:43:00,841  | py-experimenter - INFO     | All configured executions finished.
+2024-08-12 16:43:25,132  | py-experimenter - INFO     | Found 6 keyfields
+2024-08-12 16:43:25,133  | py-experimenter - INFO     | Found 8 resultfields
+2024-08-12 16:43:25,133  | py-experimenter - WARNING  | No logtables given
+2024-08-12 16:43:25,133  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 16:43:25,133  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 16:43:25,133  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 16:43:25,133  | py-experimenter - INFO     | No rows to add. All the 1 experiments already exist.
+2024-08-12 16:43:34,705  | py-experimenter - INFO     | Found 6 keyfields
+2024-08-12 16:43:34,705  | py-experimenter - INFO     | Found 8 resultfields
+2024-08-12 16:43:34,705  | py-experimenter - WARNING  | No logtables given
+2024-08-12 16:43:34,706  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-12 16:43:34,706  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-12 16:43:34,706  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-12 16:43:34,756  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2024-08-12 16:43:40,990  | py-experimenter - INFO     | All configured executions finished.
+2024-08-14 09:34:46,333  | py-experimenter - INFO     | Found 6 keyfields
+2024-08-14 09:34:46,333  | py-experimenter - INFO     | Found 7 resultfields
+2024-08-14 09:34:46,333  | py-experimenter - WARNING  | No logtables given
+2024-08-14 09:34:46,333  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-14 09:34:46,333  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-14 09:34:46,333  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-14 09:34:46,386  | py-experimenter - INFO     | 6 rows successfully added to database. 0 rows were skipped.
+2024-08-14 09:35:22,606  | py-experimenter - INFO     | All configured executions finished.
+2024-08-14 12:04:25,657  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-14 12:04:25,667  | py-experimenter - INFO     | Found 9 resultfields
+2024-08-14 12:04:25,667  | py-experimenter - WARNING  | No logtables given
+2024-08-14 12:04:25,667  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-14 12:04:25,667  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-14 12:04:25,682  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-14 12:04:25,726  | py-experimenter - INFO     | 3 rows successfully added to database. 0 rows were skipped.
+2024-08-14 12:05:54,622  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-14 12:05:54,623  | py-experimenter - INFO     | Found 9 resultfields
+2024-08-14 12:05:54,623  | py-experimenter - WARNING  | No logtables given
+2024-08-14 12:05:54,623  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-14 12:05:54,623  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-14 12:05:54,636  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-14 12:05:54,659  | py-experimenter - INFO     | No rows to add. All the 3 experiments already exist.
+2024-08-14 12:05:59,427  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 705, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Out of range value for column 'mccv_seed' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 57, in execute
+    cursor.execute(sql_statement, values)
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 357, in execute
+    result = self._connection.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 713, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1264 (22003): Out of range value for column 'mccv_seed' at row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 174, in worker
+    result_processor.process_results(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 45, in process_results
+    self.db_connector.update_database(self.database_config.table_name, values=results, condition=self.experiment_id_condition)
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 314, in update_database
+    self.execute(cursor, self._prepare_update_query(table_name, values.keys(), condition), list(values.values()))
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 59, in execute
+    raise DatabaseConnectionError(f"error \n{e}\n raised when executing sql statement.")
+py_experimenter.exceptions.DatabaseConnectionError: error 
+1264 (22003): Out of range value for column 'mccv_seed' at row 1
+ raised when executing sql statement.
+
+2024-08-14 12:06:01,064  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 705, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Out of range value for column 'mccv_seed' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 57, in execute
+    cursor.execute(sql_statement, values)
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 357, in execute
+    result = self._connection.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 713, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1264 (22003): Out of range value for column 'mccv_seed' at row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 174, in worker
+    result_processor.process_results(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 45, in process_results
+    self.db_connector.update_database(self.database_config.table_name, values=results, condition=self.experiment_id_condition)
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 314, in update_database
+    self.execute(cursor, self._prepare_update_query(table_name, values.keys(), condition), list(values.values()))
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 59, in execute
+    raise DatabaseConnectionError(f"error \n{e}\n raised when executing sql statement.")
+py_experimenter.exceptions.DatabaseConnectionError: error 
+1264 (22003): Out of range value for column 'mccv_seed' at row 1
+ raised when executing sql statement.
+
+2024-08-14 12:06:01,695  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 705, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Out of range value for column 'mccv_seed' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 57, in execute
+    cursor.execute(sql_statement, values)
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 357, in execute
+    result = self._connection.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 713, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1264 (22003): Out of range value for column 'mccv_seed' at row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 174, in worker
+    result_processor.process_results(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 45, in process_results
+    self.db_connector.update_database(self.database_config.table_name, values=results, condition=self.experiment_id_condition)
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 314, in update_database
+    self.execute(cursor, self._prepare_update_query(table_name, values.keys(), condition), list(values.values()))
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 59, in execute
+    raise DatabaseConnectionError(f"error \n{e}\n raised when executing sql statement.")
+py_experimenter.exceptions.DatabaseConnectionError: error 
+1264 (22003): Out of range value for column 'mccv_seed' at row 1
+ raised when executing sql statement.
+
+2024-08-14 12:12:03,116  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-14 12:12:03,116  | py-experimenter - INFO     | Found 9 resultfields
+2024-08-14 12:12:03,116  | py-experimenter - WARNING  | No logtables given
+2024-08-14 12:12:03,116  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-14 12:12:03,116  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-14 12:12:03,129  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-14 12:12:03,182  | py-experimenter - INFO     | 3 rows successfully added to database. 0 rows were skipped.
+2024-08-14 12:12:08,913  | py-experimenter - INFO     | All configured executions finished.
+2024-08-14 12:13:15,156  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-14 12:13:15,156  | py-experimenter - INFO     | Found 9 resultfields
+2024-08-14 12:13:15,156  | py-experimenter - WARNING  | No logtables given
+2024-08-14 12:13:15,157  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-14 12:13:15,157  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-14 12:13:15,169  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-14 12:13:15,205  | py-experimenter - INFO     | 12 rows successfully added to database. 3 rows were skipped.
+2024-08-14 12:15:42,891  | py-experimenter - INFO     | All configured executions finished.
+2024-08-21 11:10:05,578  | py-experimenter - INFO     | Found 5 keyfields
+2024-08-21 11:10:05,579  | py-experimenter - INFO     | Found 9 resultfields
+2024-08-21 11:10:05,579  | py-experimenter - WARNING  | No logtables given
+2024-08-21 11:10:05,579  | py-experimenter - WARNING  | No custom section defined in config
+2024-08-21 11:10:05,579  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-08-21 11:10:05,579  | py-experimenter - INFO     | Initialized and connected to database
+2024-08-21 11:10:05,626  | py-experimenter - INFO     | 120 rows successfully added to database. 0 rows were skipped.
+2024-08-21 11:10:11,862  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:11,935  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,137  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,290  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,323  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,388  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,390  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,496  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,505  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,510  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,558  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,574  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,600  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,675  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:12,732  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:13,263  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:16,849  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:16,916  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:16,920  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:16,930  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,167  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,182  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,223  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,257  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,283  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,372  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,415  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-08-21 11:10:17,514  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 152, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 387, in fit
+    self.threshold = np.quantile(
+                     ^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/numpy/lib/function_base.py", line 4542, in quantile
+    raise ValueError("Quantiles must be in the range [0, 1]")
+ValueError: Quantiles must be in the range [0, 1]
+
+2024-10-17 13:18:10,364  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:18:10,365  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:18:10,365  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:18:10,365  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:18:10,365  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:18:38,194  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:18:38,194  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:18:38,194  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:18:38,194  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:18:38,194  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:18:38,204  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:18:38,223  | py-experimenter - INFO     | 240 rows successfully added to database. 120 rows were skipped.
+2024-10-17 13:18:43,296  | py-experimenter - INFO     | All configured executions finished.
+2024-10-17 13:20:10,707  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:20:10,707  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:20:10,708  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:20:10,708  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:20:10,708  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:20:10,708  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:20:10,735  | py-experimenter - INFO     | 60 rows successfully added to database. 0 rows were skipped.
+2024-10-17 13:20:16,181  | py-experimenter - INFO     | All configured executions finished.
+2024-10-17 13:21:02,995  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:21:02,996  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:21:02,996  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:21:02,996  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:21:02,996  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:21:02,996  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:21:03,058  | py-experimenter - INFO     | 60 rows successfully added to database. 0 rows were skipped.
+2024-10-17 13:21:22,822  | py-experimenter - INFO     | All configured executions finished.
+2024-10-17 13:24:00,994  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:24:00,994  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:24:00,994  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:24:00,994  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:24:00,994  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:24:00,994  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:24:00,995  | py-experimenter - INFO     | No rows to add. All the 60 experiments already exist.
+2024-10-17 13:24:15,216  | py-experimenter - INFO     | All configured executions finished.
+2024-10-17 13:31:53,838  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:31:53,838  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:31:53,838  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:31:53,838  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:31:53,838  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:31:53,838  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:31:53,839  | py-experimenter - INFO     | No rows to add. All the 60 experiments already exist.
+2024-10-17 13:32:06,929  | py-experimenter - INFO     | All configured executions finished.
+2024-10-17 13:34:05,590  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:34:05,591  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:34:05,591  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:34:05,591  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:34:05,591  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:34:05,591  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:34:05,592  | py-experimenter - INFO     | No rows to add. All the 60 experiments already exist.
+2024-10-17 13:38:39,803  | py-experimenter - INFO     | All configured executions finished.
+2024-10-17 13:42:57,342  | py-experimenter - INFO     | Found 5 keyfields
+2024-10-17 13:42:57,343  | py-experimenter - INFO     | Found 9 resultfields
+2024-10-17 13:42:57,343  | py-experimenter - WARNING  | No logtables given
+2024-10-17 13:42:57,343  | py-experimenter - WARNING  | No custom section defined in config
+2024-10-17 13:42:57,343  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-10-17 13:42:57,343  | py-experimenter - INFO     | Initialized and connected to database
+2024-10-17 13:42:57,344  | py-experimenter - INFO     | No rows to add. All the 60 experiments already exist.
+2024-10-17 13:46:52,238  | py-experimenter - INFO     | All configured executions finished.
+2024-11-14 18:18:50,499  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 18:18:50,499  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 18:18:50,499  | py-experimenter - WARNING  | No logtables given
+2024-11-14 18:18:50,499  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 18:18:50,499  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 18:18:50,500  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 18:18:50,542  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2024-11-14 18:18:54,920  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 179, in worker
+    num_classes=num_classes, alpha=alpha, hidden_dim=16
+                                   ^^^^^
+NameError: name 'alpha' is not defined
+
+2024-11-14 18:18:59,252  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 163, in worker
+    predictor = ConformalPredictor(model=model, alpha=alpha)
+                                                      ^^^^^
+NameError: name 'alpha' is not defined
+
+2024-11-14 18:19:03,620  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 150, in worker
+    predictor = ConformalPredictor(model=model, alpha=alpha)
+                                                      ^^^^^
+NameError: name 'alpha' is not defined
+
+2024-11-14 18:19:07,952  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 200, in worker
+    effective_length = (1 - cal_size) * len(X_train)
+                        ~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'int' and 'tuple'
+
+2024-11-14 18:19:07,995  | py-experimenter - INFO     | All configured executions finished.
+2024-11-14 18:20:27,320  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 18:20:27,320  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 18:20:27,320  | py-experimenter - WARNING  | No logtables given
+2024-11-14 18:20:27,320  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 18:20:27,321  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 18:20:27,321  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 18:20:27,372  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2024-11-14 18:20:31,709  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 181, in worker
+    effective_length = (1 - cal_size) * len(X_train)
+                        ~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'int' and 'tuple'
+
+2024-11-14 18:20:36,137  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 164, in worker
+    predictor.fit(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/simple_model.py", line 474, in fit
+    X_train, X_cal, y_train, y_cal = train_test_split(
+                                     ^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 203, in wrapper
+    validate_parameter_constraints(
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 95, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got (0.2,) instead.
+
+2024-11-14 18:20:45,059  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/.venv/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/dyad_ranking/torch_plnet/experiments/cp_rank_experimenter.py", line 200, in worker
+    effective_length = (1 - cal_size) * len(X_train)
+                        ~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'int' and 'tuple'
+
+2024-11-14 18:20:45,113  | py-experimenter - INFO     | All configured executions finished.
+2024-11-14 18:33:02,890  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 18:33:02,890  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 18:33:02,890  | py-experimenter - WARNING  | No logtables given
+2024-11-14 18:33:02,890  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 18:33:02,890  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 18:33:02,890  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 18:33:02,932  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2024-11-14 18:33:21,429  | py-experimenter - INFO     | All configured executions finished.
+2024-11-14 18:38:42,680  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 18:38:42,681  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 18:38:42,681  | py-experimenter - WARNING  | No logtables given
+2024-11-14 18:38:42,681  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 18:38:42,681  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 18:38:42,681  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 18:38:42,751  | py-experimenter - INFO     | 960 rows successfully added to database. 0 rows were skipped.
+2024-11-14 18:40:00,356  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 18:40:00,356  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 18:40:00,356  | py-experimenter - WARNING  | No logtables given
+2024-11-14 18:40:00,356  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 18:40:00,356  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 18:40:00,356  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 18:40:00,423  | py-experimenter - INFO     | 960 rows successfully added to database. 0 rows were skipped.
+2024-11-14 19:25:44,737  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 19:25:44,737  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 19:25:44,737  | py-experimenter - WARNING  | No logtables given
+2024-11-14 19:25:44,737  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 19:25:44,737  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 19:25:44,737  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 19:25:44,784  | py-experimenter - INFO     | 96 rows successfully added to database. 0 rows were skipped.
+2024-11-14 21:06:20,427  | py-experimenter - INFO     | All configured executions finished.
+2024-11-14 22:39:30,745  | py-experimenter - INFO     | Found 5 keyfields
+2024-11-14 22:39:30,745  | py-experimenter - INFO     | Found 10 resultfields
+2024-11-14 22:39:30,745  | py-experimenter - WARNING  | No logtables given
+2024-11-14 22:39:30,745  | py-experimenter - WARNING  | No custom section defined in config
+2024-11-14 22:39:30,745  | py-experimenter - WARNING  | No codecarbon section defined in config
+2024-11-14 22:39:30,746  | py-experimenter - INFO     | Initialized and connected to database
+2024-11-14 22:39:30,783  | py-experimenter - INFO     | 1104 rows successfully added to database. 96 rows were skipped.
