@@ -712,12 +712,7 @@ class ConformalPredictor:
 
 
 class ConformalRankingPredictor:
-    def __init__(
-        self,
-        num_classes,
-        alpha=0.05,
-        hidden_dim=16,
-    ):
+    def __init__(self, num_classes, alpha=0.05, hidden_dim=16, model="LabelRanker"):
         self.num_classes = num_classes
         self.hidden_dim = hidden_dim
         self.alpha = alpha
@@ -734,7 +729,8 @@ class ConformalRankingPredictor:
         **kwargs,
     ):
         X_train, X_cal, y_train, y_cal = train_test_split(X, y, test_size=cal_size)
-        self.model = DyadRankingModel(
+
+        self.model = LabelRankingModel(
             input_dim=X_train.shape[1] + y.max() + 1, hidden_dim=self.hidden_dim
         )
         self.model.fit(
