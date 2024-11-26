@@ -499,7 +499,7 @@ class LabelRankingModel(nn.Module):
         :param X: Features
         :return: Predicted class label
         """
-        skills = self.predict_proba(X)
+        skills = self.predict_class_skills(X)
         return np.argmax(skills, axis=1)
 
 
@@ -693,7 +693,10 @@ class ConformalPredictor:
             self.model.fit(X_train, y_train, random_state=random_state, **kwargs)
         else:
             self.model.fit(X_train, y_train, **kwargs)
-        y_pred_cal = self.model.predict_proba(X_cal)
+        if isinstance(self.model, LabelRankingModel):
+            y_pred_cal = self.model.predict_class_skills(X_cal)
+        else:
+            y_pred_cal = self.model.predict_proba(X_cal)
         self.scores = 1 - y_pred_cal[np.arange(len(y_cal)), y_cal]
         n = len(self.scores)
         self.threshold = np.quantile(
@@ -703,16 +706,19 @@ class ConformalPredictor:
         )
 
     def predict_set(self, X):
-        y_probas = self.model.predict_proba(X)
+        if isinstance(self.model, LabelRankingModel):
+            y_preds = self.model.predict_class_skills(X)
+        else:
+            y_preds = self.model.predict_proba(X)
         pred_sets = []
-        for y_proba in y_probas:
-            pred_set = np.where(1 - y_proba <= self.threshold)[0]
+        for y_pred in y_preds:
+            pred_set = np.where(1 - y_pred <= self.threshold)[0]
             pred_sets.append(pred_set)
         return pred_sets
 
 
 class ConformalRankingPredictor:
-    def __init__(self, num_classes, alpha=0.05, hidden_dim=16, model="LabelRanker"):
+    def __init__(self, num_classes, alpha=0.05, hidden_dim=16):
         self.num_classes = num_classes
         self.hidden_dim = hidden_dim
         self.alpha = alpha

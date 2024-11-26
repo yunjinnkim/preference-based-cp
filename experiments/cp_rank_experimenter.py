@@ -8,6 +8,7 @@ import sys
 sys.path.insert(0, "/dss/dsshome1/04/ra43rid2/rank_cp/")
 
 import random
+from math import ceil, log2
 import numpy as np
 import torch
 import openml
@@ -18,10 +19,13 @@ import random
 from py_experimenter.experimenter import PyExperimenter
 from py_experimenter.result_processor import ResultProcessor
 from sklearn.model_selection import train_test_split
-from simple_model import ConformalRankingPredictor, ConformalPredictor, ClassifierModel
+from simple_model import (
+    ConformalRankingPredictor,
+    ConformalPredictor,
+    ClassifierModel,
+    LabelRankingModel,
+)
 from sklearn.preprocessing import LabelEncoder
-
-from math import ceil, log2
 
 from py_experimenter.database_connector_mysql import (
     DatabaseConnectorMYSQL,
@@ -29,25 +33,21 @@ from py_experimenter.database_connector_mysql import (
 )
 
 
-# def connect(self):
+def connect(self):
 
-#     db = mysql.connector.connect(
-#         host="xxx",
-#         user="xxx",
-#         password="xxx",
-#         database="xxx",
-#         ssl_disabled=False,
-#     )
-#     return db
+    db = mysql.connector.connect(
+        # TODO enter DB credentials
+    )
+    return db
 
 
-# def _start_transaction(self, connection, readonly=False):
-#     if not readonly:
-#         connection.start_transaction()
+def _start_transaction(self, connection, readonly=False):
+    if not readonly:
+        connection.start_transaction()
 
 
-# DatabaseConnectorMYSQL.connect = connect
-# DatabaseConnectorMYSQL._start_transaction = _start_transaction
+DatabaseConnectorMYSQL.connect = connect
+DatabaseConnectorMYSQL._start_transaction = _start_transaction
 
 from py_experimenter.experimenter import PyExperimenter
 from py_experimenter.result_processor import ResultProcessor
@@ -135,43 +135,110 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
     if not isinstance(y_train, np.ndarray):
         y_train = y_train.toarray()
 
+    batch_size_clf = 32
+    val_frac = 0.2
+    num_epochs = 300
+    learning_rate = 0.01
+    alpha = parameters["alpha"]
+    cal_size = parameters["fraction_cal_samples"]
+
     match parameters["model"]:
         # case "plnet":
         #     predictor = ConformalRankingPredictor(num_classes=y_train)
         case "random_forest":
             model = RandomForestClassifier(random_state=clf_seed)
-            predictor = ConformalPredictor(model=model, alpha=parameters["alpha"])
+            predictor = ConformalPredictor(model=model, alpha=alpha)
+            predictor.fit(
+                X_train,
+                y_train,
+                cal_size=parameters["fraction_cal_samples"],
+                random_state=clf_seed,
+            )
+
+            gradient_updates = 0
         case "classifier_nn":
             model = ClassifierModel(
                 input_dim=X_train.shape[1], hidden_dim=16, output_dim=num_classes
             )
-            predictor = ConformalPredictor(model=model, alpha=parameters["alpha"])
+            predictor = ConformalPredictor(model=model, alpha=alpha)
+            predictor.fit(
+                X_train,
+                y_train,
+                num_epochs=num_epochs,
+                random_state=clf_seed,
+                patience=num_epochs,
+                batch_size=batch_size_clf,
+                val_frac=val_frac,
+                cal_size=cal_size,
+                learning_rate=learning_rate,
+            )
+            gradient_updates = predictor.model.gradient_updates
+
+        case "plnet_clf_arch":
+            model = LabelRankingModel(
+                input_dim=X_train.shape[1], hidden_dim=16, output_dim=num_classes
+            )
+            predictor = ConformalPredictor(model=model, alpha=alpha)
+            predictor.fit(
+                X_train,
+                y_train,
+                num_epochs=num_epochs,
+                random_state=clf_seed,
+                patience=num_epochs,
+                batch_size=batch_size_clf,
+                val_frac=val_frac,
+                cal_size=cal_size,
+                learning_rate=learning_rate,
+            )
+            gradient_updates = predictor.model.gradient_updates
+
         case "plnet":
             predictor = ConformalRankingPredictor(
-                num_classes=num_classes, alpha=parameters["alpha"], hidden_dim=16
+                num_classes=num_classes, alpha=alpha, hidden_dim=16
             )
-        case "plnet_cross_instance":
-            predictor = ConformalRankingPredictor(
-                num_classes=num_classes, alpha=parameters["alpha"], hidden_dim=16
+            effective_length = (1 - cal_size) * len(X_train)
+            num_pairs = effective_length * (num_classes - 1)
+            batch_size_rnk = num_pairs * batch_size_clf / effective_length
+            batch_size_rnk = ceil(batch_size_rnk)
+            predictor.fit(
+                X_train,
+                y_train,
+                random_state=clf_seed,
+                use_cross_isntance_data=False,
+                num_epochs=num_epochs,
+                patience=num_epochs,
+                val_frac=val_frac,
+                cal_size=cal_size,
+                batch_size=batch_size_rnk,
+                learning_rate=learning_rate,
             )
+            gradient_updates = predictor.model.gradient_updates
 
-    if parameters["model"] == "plnet_cross_instance":
-        predictor.fit(
-            X_train,
-            y_train,
-            cal_size=parameters["fraction_cal_samples"],
-            random_state=clf_seed,
-            use_cross_isntance_data=True,
-            num_pairs=-1,
-            # num_pairs=len(X_train) * num_classes * ceil(log2(len(X_train))),
-        )
-    else:
-        predictor.fit(
-            X_train,
-            y_train,
-            cal_size=parameters["fraction_cal_samples"],
-            random_state=clf_seed,
-        )
+        case "plnet_cross_instance":
+            effective_length = (1 - cal_size) * len(X_train)
+            num_pairs = (
+                (num_classes - 1) * ceil(log2(effective_length)) * (effective_length)
+            )
+            num_pairs = ceil(num_pairs)
+            batch_size_rnk = num_pairs * batch_size_clf / effective_length
+            batch_size_rnk = ceil(batch_size_rnk)
+            predictor = ConformalRankingPredictor(
+                num_classes=num_classes, alpha=alpha, hidden_dim=16
+            )
+            predictor.fit(
+                X_train,
+                y_train,
+                random_state=clf_seed,
+                use_cross_isntance_data=True,
+                num_epochs=num_epochs,
+                patience=num_epochs,
+                num_pairs=num_pairs,
+                cal_size=cal_size,
+                val_frac=val_frac,
+                batch_size=batch_size_rnk,
+                learning_rate=learning_rate,
+            )
+            gradient_updates = predictor.model.gradient_updates
 
     X_test = preprocessor.transform(X_test)
 
@@ -212,6 +279,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             "efficiency_std": efficiency_std,
             "clf_seed": clf_seed,
             "mccv_seed": mccv_split_seed,
+            "gradient_updates": gradient_updates,
         }
     )
 
@@ -234,4 +302,4 @@ if __name__ == "__main__":
 
     experimenter.fill_table_from_config()
 
-    experimenter.execute(max_experiments=1, experiment_function=worker)
+    experimenter.execute(max_experiments=-1, experiment_function=worker)

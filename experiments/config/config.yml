@@ -1,42 +1,44 @@
 PY_EXPERIMENTER:
-    n_jobs: 16
+    n_jobs: 14
 
     Database:
-      provider: sqlite
+      provider: mysql
       database: jonas_test
       table:
-        name: cp_rank_dev
+        name: cp_rank_dev__new_cross
         keyfields: 
           model:
             type: VARCHAR(255)
-            # values: ['plnet', 'classifier_nn', 'random_forest']
-            values: ['random_forest']
+            # values: ['plnet_cross_instance']
+            values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
           openml_id:
             type: INTEGER
-            values: [61, 187, 15, 31, 4534, 1461]
-            # values: [61]
-          clf_seed:
-            type: INTEGER
-            values: [1]
-          mccv_split:
-            type: INTEGER
-            values: [1]
+            # values: [35,41,54,61, 187, 15, 31, 4534]
+            values: [35,41,54,61, 187]
+          master_seed:
+            type: Integer
+            values: [1,2,3,4,5,6,7,8,9,10]
+            # values: [1]
           alpha:
             type: FLOAT
-            # values: [0.05,0.1,0.2]
-            values: [0.05]
+            # values: [0.1]
+            values: [0.05,0.1,0.2]
+            # values: [0.05, 0.2]
           fraction_cal_samples:
             type: FLOAT
-            # values: [0.1,0.2]
-            values: [0.1]
-
+            values: [0.1,0.2]
+            # values: [0.2]
+            # values: [0.1]
 
         resultfields:
-          score_f1: Float 
-          score_acc: Float 
-          score_bacc: Float 
-          # score_roc_auc: Float 
-          coverage_mean: Float 
-          coverage_std: Float 
-          efficiency_mean: Float 
-          efficiency_std: Float 
+          score_f1: FLOAT 
+          score_acc: FLOAT 
+          score_bacc: FLOAT 
+          # score_roc_auc: FLOAT 
+          coverage_mean: FLOAT 
+          coverage_std: FLOAT 
+          efficiency_mean: FLOAT 
+          efficiency_std: FLOAT
+          clf_seed: LONG
+          mccv_seed: LONG
+          gradient_updates: LONG
