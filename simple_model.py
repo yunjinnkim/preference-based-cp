@@ -124,6 +124,94 @@ class LabelPairDataset(Dataset):
         return self.X_pairs[idx], self.y_pairs[idx]
 
 
+class LabelPairDataset(Dataset):
+    """Given classificaiton data X,y, this generates a dataset of label ranking pairs, where the class labels are encoded as indices and all possible preferences are present. The first alternative is the preferred one.
+
+    :param Dataset: _description_
+    """
+
+    def __init__(self, X, y, num_classes):
+
+        X_pairs = []
+        y_pairs = []
+
+        for X_vec, label in zip(X, y):
+            for k in range(0, num_classes):
+                if k == label:
+                    continue
+                X_pairs.append(
+                    torch.vstack(
+                        [
+                            torch.tensor(X_vec, dtype=torch.float32),
+                            torch.tensor(X_vec, dtype=torch.float32),
+                        ]
+                    )
+                )
+                y_pairs.append(
+                    torch.vstack(
+                        [
+                            torch.tensor(label, dtype=torch.long),
+                            torch.tensor(k, dtype=torch.long),
+                        ]
+                    )
+                )
+
+        self.X_pairs = torch.stack(X_pairs)
+        self.y_pairs = torch.stack(y_pairs)
+
+    def __len__(self):
+        return len(self.y_pairs)
+
+    def __getitem__(self, idx):
+        return self.X_pairs[idx], self.y_pairs[idx]
+
+
+class MCPairDatasetFromSoftLabels(Dataset):
+    """Given classificaiton data X,y, this generates a dataset of label ranking pairs, where the class labels are encoded as indices and all possible preferences are present. The first alternative is the preferred one.
+
+    :param Dataset: _description_
+    """
+
+    def __init__(self, dataset, soft_labels, num_classes, cross_instance_pairs=None):
+        """
+
+        :param dataset: _description_
+        :param soft_labels: _description_
+        :param num_classes: _description_
+        :param cross_instance_pairs: _description_, defaults to None
+        """
+
+        for i, (X_vec, label) in enumerate(dataset):
+            for k in range(0, num_classes):
+                if k == label:
+                    continue
+                X_pairs.append(
+                    torch.vstack(
+                        [
+                            torch.tensor(X_vec, dtype=torch.float32),
+                            torch.tensor(X_vec, dtype=torch.float32),
+                        ]
+                    )
+                )
+                y_pairs.append(
+                    torch.vstack(
+                        [
+                            torch.tensor(label, dtype=torch.long),
+                            torch.tensor(k, dtype=torch.long),
+                        ]
+                    )
+                )
+
+        self.X_pairs = torch.stack(X_pairs)
+        self.y_pairs = torch.stack(y_pairs)
+
+    def __len__(self):
+        return len(self.y_pairs)
+
+    def __getitem__(self, idx):
+        return self.X_pairs[idx], self.y_pairs[idx]
+
+
 class MCDyadOneHotPairDataset(Dataset):
     """Given classificaiton data X,y, this generates a dataset of dyad pairs, where the class labels are one hot encoded and all possible preferences are present. The first alternative is the preferred one.
 
