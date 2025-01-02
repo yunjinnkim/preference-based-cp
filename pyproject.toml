@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "cp-via-dyad-ranking"
+name = "cp-via-ranking"
 version = "0.1.0"
-description = "This project is concerned with conformal prediction via dyad ranking"
+description = "This project is concerned with conformal prediction via ranking"
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
@@ -10,6 +10,7 @@ python = "^3.11"
 torch = "^2.3.1"
 scikit-learn = "^1.5.0"
 numpy = "^1.26.4"
+mapie = "^0.9.1"
 
 
 [tool.poetry.group.dev.dependencies]
