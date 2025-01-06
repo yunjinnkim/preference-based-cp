@@ -9,33 +9,29 @@ PY_EXPERIMENTER:
         keyfields: 
           model:
             type: VARCHAR(255)
-            # values: ['plnet_cross_instance']
-            values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
+            values: ['classifier', 'ranker']
+            # values: ['ranker']
+            # values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
           openml_id:
             type: INTEGER
-            # values: [35,41,54,61, 187, 15, 31, 4534]
-            values: [41,35,54]
+            values: [35,41,54,61, 187, 15, 31, 4534]
+            # values: [41]
           master_seed:
             type: Integer
             values: [1,2,3,4,5,6,7,8,9,10]
-            # values: [1]
-          alpha:
-            type: FLOAT
-            # values: [0.1]
-            values: [0.05,0.1,0.2]
-            # values: [0.05, 0.2]
+            # values: [1,2]
           fraction_cal_samples:
             type: FLOAT
-            # values: [0.1,0.2]
-            values: [0.2]
-            # values: [0.1]
+            values: [0.25]
 
         resultfields:
           clf_seed: LONG
           mccv_seed: LONG
+
       logtables:
         results:
           conformity_score: VARCHAR(255)
+          alpha: FLOAT
           score_f1: FLOAT 
           score_acc: FLOAT 
           score_bacc: FLOAT 
@@ -45,3 +41,6 @@ PY_EXPERIMENTER:
           efficiency_mean: FLOAT 
           efficiency_std: FLOAT
           gradient_updates: LONG
+          clf_seed: LONG
+          mccv_seed: LONG
+

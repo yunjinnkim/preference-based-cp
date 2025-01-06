@@ -1,34 +1,43 @@
 import numpy as np
 
+from models.ranking_models import LabelRankingModel
 
 class ConformalPredictor:
 
-    def __init__(self, model, X_cal, y_cal, alpha=0.05):
-        self.model = model
+    def __init__(self, estimator):
+        self.estimator = estimator
+
+    def fit(self, X_cal, y_cal, **kwargs):
         self.X_cal = X_cal
         self.y_cal = y_cal
-        self.alpha = alpha
-
-    def conformalize(self, **kwargs):
-        y_pred_cal = self.model.predict_proba(self.X_cal)
+        if isinstance(self.estimator, LabelRankingModel):
+            y_pred_cal = self.estimator.predict_class_skills(self.X_cal)
+        else:
+            y_pred_cal = self.estimator.predict_proba(self.X_cal)
         self.scores = 1 - y_pred_cal[np.arange(len(self.y_cal)), self.y_cal]
+
+    def predict_set(self, X, alpha=0.2):
         n = len(self.scores)
         self.threshold = np.quantile(
             self.scores,
-            np.clip(np.ceil((n + 1) * (1 - self.alpha)) / n, 0, 1),
+            np.clip(np.ceil((n + 1) * (1 - alpha)) / n, 0, 1),
             method="inverted_cdf",
         )
-
-    def predict_set(self, X):
-        if isinstance(self.model, LabelRankingModel):
-            y_preds = self.model.predict_class_skills(X)
+        if isinstance(self.estimator, LabelRankingModel):
+            y_preds = self.estimator.predict_class_skills(X)
         else:
-            y_preds = self.model.predict_proba(X)
+            y_preds = self.estimator.predict_proba(X)
         pred_sets = []
         for y_pred in y_preds:
             pred_set = np.where(1 - y_pred <= self.threshold)[0]
             pred_sets.append(pred_set)
         return pred_sets
+    
+    def predict(self,X, alpha=0.2):
+        y_crisp = self.estimator.predict(X)
+        y_set = self.predict_set(X, alpha=alpha)
+        return y_crisp, y_set
+
 
 
 class ConformalRankingPredictor:

@@ -5,7 +5,7 @@ from sklearn.exceptions import NotFittedError
 
 from torch import nn
 
-from simple_model import EarlyStopping
+from models.simple_model import EarlyStopping
 from util.ranking_datasets import (
     DyadOneHotPairDataset,
     MCDyadOneHotPairDataset,
