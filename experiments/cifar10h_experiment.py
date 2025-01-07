@@ -7,8 +7,7 @@ import sys
 
 # sys.path.insert(0, "/dss/dsshome1/04/ra43rid2/rank_cp/")
 
-# sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
-sys.path.insert(0, "/home/jonas/Documents/Research/")
+sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
 
 import random
 from math import ceil, log2
@@ -351,7 +350,7 @@ if __name__ == "__main__":
     print(sys.version)
 
     experimenter = PyExperimenter(
-        experiment_configuration_file_path="./config/cfg_simple_debug.yml",
+        experiment_configuration_file_path="./experiments/config/cfg_simple_debug.yml",
         use_codecarbon=False,
     )
 
