@@ -41,7 +41,7 @@ class LabelRankingModel(nn.Module):
     def _fit(
         self,
         train_loader,
-        val_loader,
+        val_loader=None,
         learning_rate=0.01,
         num_epochs=100,
         random_state=None,
@@ -59,8 +59,8 @@ class LabelRankingModel(nn.Module):
 
         self.train_losses = []
         self.val_losses = []
-
-        early_stopping = EarlyStopping(patience=patience, delta=delta)
+        if val_loader:
+            early_stopping = EarlyStopping(patience=patience, delta=delta)
 
         # Training loop
         for epoch in range(num_epochs):
@@ -85,33 +85,39 @@ class LabelRankingModel(nn.Module):
             train_loss /= len(train_loader)
 
             # Validation step
-            self.eval()
-            val_loss = 0
-            with torch.no_grad():
+            
+            if val_loader:
+                self.eval()
+                val_loss = 0
+                with torch.no_grad():
 
-                for val_inputs, val_labels in val_loader:
-                    val_outputs = self(val_inputs)
-                    val_outputs_for_labels = val_outputs.gather(dim=2, index=val_labels)
-                    v_loss = (
-                        torch.log(
-                            torch.exp(val_outputs_for_labels[:, 0])
-                            + torch.exp(val_outputs_for_labels[:, 1])
-                        )
-                        - val_outputs_for_labels[:, 0]
-                    ).mean()
-                    val_loss += v_loss.item()
-            val_loss /= len(val_loader)
+                    for val_inputs, val_labels in val_loader:
+                        val_outputs = self(val_inputs)
+                        val_outputs_for_labels = val_outputs.gather(dim=2, index=val_labels)
+                        v_loss = (
+                            torch.log(
+                                torch.exp(val_outputs_for_labels[:, 0])
+                                + torch.exp(val_outputs_for_labels[:, 1])
+                            )
+                            - val_outputs_for_labels[:, 0]
+                        ).mean()
+                        val_loss += v_loss.item()
+                val_loss /= len(val_loader)
+                self.val_losses.append(val_loss)
 
             self.train_losses.append(train_loss)
-            self.val_losses.append(val_loss)
 
             # Step the scheduler based on validation loss
-            scheduler.step(val_loss)
+            if val_loader:
+                scheduler.step(val_loss)
+            else:
+                scheduler.step(train_loss)
             self.effective_epochs += 1
-            early_stopping(val_loss)
-            if early_stopping.early_stop:
-                print("Stopping training.")
-                break
+            if val_loader:
+                early_stopping(val_loss)
+                if early_stopping.early_stop:
+                    print("Stopping training.")
+                    break
 
     def fit(
         self,
