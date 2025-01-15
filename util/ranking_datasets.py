@@ -88,16 +88,15 @@ class LabelPairDataset(Dataset):
     :param Dataset: _description_
     """
 
-    def __init__(self,X=None, y=None, num_classes=None):
+    def __init__(self, X=None, y=None, num_classes=None):
         if X is not None:
-            self.create_from_classification_data(X,y,num_classes)
+            self.create_from_classification_data(X, y, num_classes)
 
     def create_from_numpy_pairs(self, X_pairs, y_pairs):
-        self.X_pairs = torch.tensor(X_pairs,dtype=torch.float32)
-        self.y_pairs = torch.tensor(y_pairs,dtype=torch.long)
+        self.X_pairs = torch.tensor(X_pairs, dtype=torch.float32)
+        self.y_pairs = torch.tensor(y_pairs, dtype=torch.long)
 
-
-    def create_from_classification_data(self,X, y, num_classes):
+    def create_from_classification_data(self, X, y, num_classes):
         X_pairs = []
         y_pairs = []
 
@@ -124,7 +123,6 @@ class LabelPairDataset(Dataset):
 
         self.X_pairs = torch.stack(X_pairs)
         self.y_pairs = torch.stack(y_pairs)
-
 
     def __len__(self):
         return len(self.y_pairs)

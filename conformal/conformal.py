@@ -2,6 +2,7 @@ import numpy as np
 
 from models.ranking_models import LabelRankingModel
 
+
 class ConformalPredictor:
 
     def __init__(self, estimator):
@@ -30,14 +31,15 @@ class ConformalPredictor:
         pred_sets = []
         for y_pred in y_preds:
             pred_set = np.where(1 - y_pred <= self.threshold)[0]
+            if pred_set.size == 0:
+                pred_set = [np.argmax(y_pred)]
             pred_sets.append(pred_set)
         return pred_sets
-    
-    def predict(self,X, alpha=0.2):
+
+    def predict(self, X, alpha=0.2):
         y_crisp = self.estimator.predict(X)
         y_set = self.predict_set(X, alpha=alpha)
         return y_crisp, y_set
-
 
 
 class ConformalRankingPredictor:
