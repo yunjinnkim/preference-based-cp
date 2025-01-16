@@ -17,6 +17,20 @@ from torch.utils.data import DataLoader, random_split
 
 from util.ranking_datasets import create_all_dyads, create_dyads
 
+import torch
+import torch.nn as nn
+
+
+class SortLayer(nn.Module):
+    def __init__(self, dim=-1, descending=False):
+        super(SortLayer, self).__init__()
+        self.dim = dim
+        self.descending = descending
+
+    def forward(self, x):
+        sorted_values, _ = torch.sort(x, dim=self.dim, descending=self.descending)
+        return sorted_values
+
 
 class LabelRankingModel(nn.Module):
     """Simple neural network model for label ranking.
@@ -215,19 +229,34 @@ class DyadRankingModel(nn.Module):
     :param nn: _description_
     """
 
-    def __init__(self, input_dim, hidden_dim):
+    def __init__(self, input_dim, hidden_dims, activations=None):
         super(DyadRankingModel, self).__init__()
-        self.input = nn.Linear(input_dim, hidden_dim)
-        self.hidden = nn.Linear(hidden_dim, 1)
-        self.sigmoid = nn.Sigmoid()
-        self.effective_epochs = 0
+
+        layers = []
+        in_features = input_dim
+
+        if activations:
+            for hidden_size, activation in zip(hidden_dims, activations):
+                layers.append(nn.Linear(in_features, hidden_size))
+                layers.append(activation)  # Add activation function
+                in_features = hidden_size
+        else:
+
+            for hidden_size in hidden_dims:
+                layers.append(nn.Linear(in_features, hidden_size))
+                layers.append(nn.Sigmoid())  # Add activation function
+                in_features = hidden_size
+
+        # Add the final output layer
+        layers.append(nn.Linear(in_features, 1))
+
+        # Combine all layers into a single nn.Sequential module
+        self.network = nn.Sequential(*layers)
         self.gradient_updates = 0
+        self.effective_epochs = 0
 
     def forward(self, x):
-        x = self.input(x)
-        x = self.sigmoid(x)
-        x = self.hidden(x)
-        return x
+        return self.network(x)
 
     def _fit(
         self,

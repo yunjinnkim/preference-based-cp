@@ -52,7 +52,14 @@ class DyadOneHotPairDataset(Dataset):
     :param Dataset: _description_
     """
 
-    def __init__(self, X, y, num_classes):
+    def __init__(self, X=None, y=None, num_classes=None):
+        if X is not None:
+            self.create_from_classification_data(X, y, num_classes)
+
+    def create_from_numpy_dyad_pairs(self, dyad_pairs):
+        self.dyad_pairs = torch.tensor(dyad_pairs, dtype=torch.float32)
+
+    def create_from_classification_data(self, X, y, num_classes):
         dyad_pairs = []
         eye = torch.eye(num_classes)
 
