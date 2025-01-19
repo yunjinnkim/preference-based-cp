@@ -12,11 +12,11 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision.models import resnet18
 from torch.optim import Adam
 
-class LabelRankingResnet(nn.Module):
+class ClassifierResnet(nn.Module):
     """An image classifier based on a pretrained resnet18."""
 
-    def __init__(self, input_dim, hidden_dim, output_dim):
-        super(LabelRankingResnet, self).__init__()
+    def __init__(self):
+        super(ClassifierResnet, self).__init__()
         self.model = resnet18(pretrained=True)
         num_ftrs = self.model.fc.in_features
 
@@ -30,7 +30,7 @@ class LabelRankingResnet(nn.Module):
 
     def fit(
         self,
-        pairset_loader,
+        train_loader,
         learning_rate=0.01,
         num_epochs=100,
         random_state=None,
@@ -39,39 +39,29 @@ class LabelRankingResnet(nn.Module):
         self.classes_ = 10
 
         optimizer = Adam(self.model.parameters(), lr=learning_rate)
+        criterion = torch.nn.CrossEntropyLoss()
 
         for epoch in range(num_epochs):
             self.model.train()
             running_loss = 0.0
-            for inputs_a, labels_a, inputs_b, labels_b in pairset_loader:
-                # inputs_a, labels_a, inputs_b, labels_b  = inputs_a.to(device), labels_a.to(device), inputs_b.to(device), labels_b.to(device)
-                labels_a = labels_a.unsqueeze(-1)
-                labels_b = labels_b.unsqueeze(-1)
-                optimizer.zero_grad()
-                # inputs = torch.cat([inputs_a, inputs_b], dim=0)
-                # outputs = self.model(inputs)
-                outputs_a = self.model(inputs_a)
-                outputs_b = self.model(inputs_b)
-                # outputs_a, outputs_b = torch.split(outputs, inputs_a.size(0), dim=0)
-                
-                outputs_for_labels_a = outputs_a.gather(dim=1, index=labels_a)
-                outputs_for_labels_b = outputs_b.gather(dim=1, index=labels_b)
+            correct = 0
+            total = 0
+            for inputs, labels in train_loader:
 
-                # Negative log-likelihood of Bradley-Terry model. Skill values are modeled as exp of neural network output
-                loss = (
-                    torch.log(
-                        torch.exp(outputs_for_labels_a)
-                        + torch.exp(outputs_for_labels_b)
-                    )
-                    - outputs_for_labels_a
-                )
-                loss = loss.mean()
+                optimizer.zero_grad()
+
+                outputs = self.model(inputs)
+                loss = criterion(outputs, labels)
                 loss.backward()
                 optimizer.step()
 
                 running_loss += loss.item()
-                if verbose:
-                    print(f"epoch: {epoch} loss {loss}")
+                _, predicted = torch.max(outputs, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+            if verbose:
+                print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {running_loss/len(train_loader):.4f}, Accuracy: {100 * correct / total:.2f}%')
+
    
     def predict_class_skills(self, X):
         check_is_fitted(self, ["classes_"])
