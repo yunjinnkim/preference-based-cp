@@ -74,6 +74,7 @@ class LabelRankingModel(nn.Module):
         random_state=None,
         patience=5,
         delta=0.0,
+        verbose=False
     ):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
@@ -136,6 +137,11 @@ class LabelRankingModel(nn.Module):
 
             self.train_losses.append(train_loss)
 
+            if verbose:
+                print(f"Epoch {epoch + 1}/{num_epochs}")
+                print(f"  Train Loss: {train_loss / len(train_loader):.4f}")
+                print(f"  Val Loss: {val_loss / len(val_loader):.4f}")
+
             # Step the scheduler based on validation loss
             if val_loader:
                 scheduler.step(val_loss)
@@ -188,7 +194,7 @@ class LabelRankingModel(nn.Module):
             )
         else:
             dataset = LabelPairDataset(X, y, num_classes=self.num_classes)
-        gen = torch.Generator(device="cpu").manual_seed(random_state)
+        gen = torch.Generator().manual_seed(random_state)
 
         train_dataset, val_dataset = random_split(
             dataset, [1 - val_frac, val_frac], generator=gen
@@ -267,6 +273,7 @@ class DyadRankingModel(nn.Module):
         random_state=None,
         patience=5,
         delta=0.0,
+        verbose=False
     ):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
@@ -317,6 +324,11 @@ class DyadRankingModel(nn.Module):
 
             self.train_losses.append(train_loss)
             self.val_losses.append(val_loss)
+            if verbose:
+                print(f"Epoch {epoch + 1}/{num_epochs}")
+                print(f"  Train Loss: {train_loss / len(train_loader):.4f}")
+                print(f"  Val Loss: {val_loss / len(val_loader):.4f}")
+
 
             # Step the scheduler based on validation loss
             scheduler.step(val_loss)
@@ -365,7 +377,7 @@ class DyadRankingModel(nn.Module):
             )
         else:
             dyadic_dataset = DyadOneHotPairDataset(X, y, num_classes=self.num_classes)
-        gen = torch.Generator(device="cpu").manual_seed(random_state)
+        gen = torch.Generator().manual_seed(random_state)
 
         train_dataset, val_dataset = random_split(
             dyadic_dataset, [1 - val_frac, val_frac], generator=gen
