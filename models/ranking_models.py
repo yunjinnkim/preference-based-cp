@@ -20,6 +20,8 @@ from util.ranking_datasets import create_all_dyads, create_dyads
 import torch
 import torch.nn as nn
 
+eps = 1e-8
+
 
 class SortLayer(nn.Module):
     def __init__(self, dim=-1, descending=False):
@@ -74,7 +76,7 @@ class LabelRankingModel(nn.Module):
         random_state=None,
         patience=5,
         delta=0.0,
-        verbose=False
+        verbose=False,
     ):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
@@ -273,7 +275,7 @@ class DyadRankingModel(nn.Module):
         random_state=None,
         patience=5,
         delta=0.0,
-        verbose=False
+        verbose=False,
     ):
         optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
@@ -295,7 +297,8 @@ class DyadRankingModel(nn.Module):
             train_loss = 0
             for inputs in train_loader:
                 optimizer.zero_grad()
-                outputs = self(inputs)
+
+                outputs = self(inputs) + eps
                 loss = (
                     torch.log(torch.exp(outputs[:, 0]) + torch.exp(outputs[:, 1]))
                     - outputs[:, 0]
@@ -303,6 +306,9 @@ class DyadRankingModel(nn.Module):
                 loss = loss.mean()
                 train_loss += loss.item()
                 loss.backward()
+
+                torch.nn.utils.clip_grad_norm_(self.parameters(), max_norm=1.0)
+
                 optimizer.step()
                 self.gradient_updates += 1
             train_loss /= len(train_loader)
@@ -328,7 +334,6 @@ class DyadRankingModel(nn.Module):
                 print(f"Epoch {epoch + 1}/{num_epochs}")
                 print(f"  Train Loss: {train_loss / len(train_loader):.4f}")
                 print(f"  Val Loss: {val_loss / len(val_loader):.4f}")
-
 
             # Step the scheduler based on validation loss
             scheduler.step(val_loss)
