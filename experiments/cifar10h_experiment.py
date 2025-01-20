@@ -139,60 +139,6 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
         torch.cuda.manual_seed(clf_seed)
         torch.cuda.manual_seed_all(clf_seed)
 
-    dataset = openml.datasets.get_dataset(parameters["openml_id"])
-    X, y, _, _ = dataset.get_data(
-        target=dataset.default_target_attribute, dataset_format="dataframe"
-    )
-
-    # Automatically identify categorical and numerical columns
-    categorical_features = X.select_dtypes(
-        include=["object", "category"]
-    ).columns.tolist()
-    numerical_features = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
-
-    num_classes = len(np.unique(y))
-
-    X_train, X_test_orig, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=mccv_split_seed
-    )
-
-    # Encode labels
-    le = LabelEncoder()
-
-    y_train = le.fit_transform(y_train)
-    y_test = le.transform(y_test)
-
-    # Preprocessing for numerical data: Impute missing values, then scale
-    numerical_transformer = Pipeline(
-        steps=[
-            ("imputer", SimpleImputer(strategy="mean")),
-            ("scaler", StandardScaler()),
-        ]
-    )
-
-    # Preprocessing for categorical data: Impute missing values, then one-hot encode
-    categorical_transformer = Pipeline(
-        steps=[
-            ("imputer", SimpleImputer(strategy="most_frequent")),
-            ("onehot", OneHotEncoder(handle_unknown="ignore")),
-        ]
-    )
-
-    # Combine preprocessing steps
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ("num", numerical_transformer, numerical_features),
-            ("cat", categorical_transformer, categorical_features),
-        ]
-    )
-
-    X_train = preprocessor.fit_transform(X_train)
-
-    if not isinstance(X_train, np.ndarray):
-        X_train = X_train.toarray()
-    if not isinstance(y_train, np.ndarray):
-        y_train = y_train.toarray()
-
     batch_size_clf = 32
     val_frac = 0.2
     num_epochs = 300
