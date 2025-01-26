@@ -71,58 +71,119 @@ from sklearn.model_selection import cross_validate
 from torchcp.classification.utils import Metrics
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
-    f1_score,
     accuracy_score,
     balanced_accuracy_score,
-    roc_auc_score,
 )
 
 
-def evaluate_predictions(
-    y_test,
-    y_pred_crisp,
-    y_pred_set,
+def evaluate(
+    predictor,
+    model,
+    alpha,
     conformity_score_name,
-    alpha_value,
+    test_loader,
+    num_classes,
     clf_seed,
     mccv_split_seed,
     gradient_updates,
     result_processor,
 ):
-    # Classifcation metrics of crisp (point) prediction
-    score_f1 = f1_score(y_test, y_pred_crisp, average="macro")
-    score_acc = accuracy_score(y_test, y_pred_crisp)
-    score_bacc = balanced_accuracy_score(y_test, y_pred_crisp)
-    # score_roc_auc = roc_auc_score(
-    #     y_test, y_pred_crisp, average="macro", multi_class="ovr"
-    # )
 
-    # Conformal prediction metrics
-    hits = [y_test[i] in y_pred_set[i] for i in range(len(y_test))]
-    lens = [len(y_pred_set[i]) for i in range(len(y_test))]
-    coverage_mean = np.mean(hits)
-    coverage_std = np.std(hits)
-    efficiency_mean = np.mean(lens)
-    efficiency_std = np.std(lens)
+    predictions_sets_list = []
+    predictions_list = []
+    labels_list = []
+    logits_list = []
+    feature_list = []
 
-    result_processor.process_logs(
-        {
-            "results": {
-                "score_f1": score_f1,
-                "score_acc": score_acc,
-                "score_bacc": score_bacc,
+    # Evaluate in inference mode
+    predictor._model.eval()
+    with torch.no_grad():
+        for batch in test_loader:
+            # Move batch to device and get predictions
+            inputs = batch[0]
+            labels = batch[1]
+
+            # Get predictions as bool tensor (N x C)
+            if isinstance(predictor, ConformalPredictor):
+                batch_predictions = predictor.predict(inputs, alpha=alpha)
+            else:
+                batch_predictions = predictor.predict(inputs)
+
+            logits = model(inputs)
+
+            predicted_label = logits.argmax(axis=1)
+            # Accumulate predictions and labels
+            predictions_sets_list.append(batch_predictions)
+            predictions_list.append(predicted_label)
+            labels_list.append(labels)
+            logits_list.append(logits)
+            feature_list.append(inputs)
+
+        # Concatenate all batches
+        val_prediction_sets = torch.cat(predictions_sets_list, dim=0)  # (N_val x C)
+        val_predictions = torch.cat(predictions_list, dim=0)
+        val_labels = torch.cat(labels_list, dim=0)  # (N_val,)
+        val_logits = torch.cat(logits_list, dim=0)
+        val_features = torch.cat(feature_list, dim=0)
+
+        print(val_prediction_sets)
+
+        y_pred = val_predictions.detach().cpu().numpy()
+        y_true = val_labels.detach().cpu().numpy()
+
+        # Compute evaluation metrics
+        metric = Metrics()
+
+        metrics = {
+            "coverage_rate": metric("coverage_rate")(
+                prediction_sets=val_prediction_sets, labels=val_labels
+            ),
+            "average_size": metric("average_size")(
+                prediction_sets=val_prediction_sets, labels=val_labels
+            ),
+            "cov_gap": metric("CovGap")(
+                prediction_sets=val_prediction_sets,
+                labels=val_labels,
+                alpha=alpha,
+                num_classes=num_classes,
+            ),
+            "vio_classes": metric("VioClasses")(
+                prediction_sets=val_prediction_sets,
+                labels=val_labels,
+                alpha=alpha,
+                num_classes=num_classes,
+            ),
+            # "diff_violation": metric("DiffViolation")(
+            #     val_logits,
+            #     prediction_sets=val_prediction_sets,
+            #     labels=val_labels,
+            #     alpha=alpha,
+            # ),
+            "sscv": metric("SSCV")(
+                prediction_sets=val_prediction_sets,
+                labels=val_labels,
+                alpha=alpha,
+            ),
+            "wsc": metric("WSC")(
+                val_features,
+                prediction_sets=val_prediction_sets,
+                labels=val_labels,
+            ),
+            "acc": accuracy_score(y_true, y_pred),
+            "bacc": balanced_accuracy_score(y_true, y_pred),
+        }
+
+        metrics.update(
+            {
                 "conformity_score": conformity_score_name,
-                "alpha": alpha_value,
-                "coverage_mean": coverage_mean,
-                "coverage_std": coverage_std,
-                "efficiency_mean": efficiency_mean,
-                "efficiency_std": efficiency_std,
+                "alpha": alpha,
                 "gradient_updates": gradient_updates,
                 "clf_seed": clf_seed,
                 "mccv_seed": mccv_split_seed,
             }
-        }
-    )
+        )
+
+    result_processor.process_logs({"results": metrics})
 
 
 def worker(parameters: dict, result_processor: ResultProcessor, custom_config: dict):
@@ -244,81 +305,20 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
                 predictor.calibrate(cal_loader, alpha)
 
+                evaluate(
+                    predictor,
+                    model,
+                    alpha,
+                    type(conformity_score).__name__,
+                    test_loader,
+                    num_classes,
+                    clf_seed,
+                    mccv_split_seed,
+                    gradient_updates,
+                    result_processor,
+                )
+
                 ### Evaluation
-
-                predictions_sets_list = []
-                labels_list = []
-                logits_list = []
-                feature_list = []
-
-                # Evaluate in inference mode
-                predictor._model.eval()
-                with torch.no_grad():
-                    for batch in test_loader:
-                        # Move batch to device and get predictions
-                        inputs = batch[0].to("cpu")
-                        labels = batch[1].to("cpu")
-
-                        # Get predictions as bool tensor (N x C)
-                        batch_predictions = predictor.predict(inputs)
-
-                        logits = predictor._model(inputs)
-
-                        # Accumulate predictions and labels
-                        predictions_sets_list.append(batch_predictions)
-                        labels_list.append(labels)
-                        logits_list.append(logits)
-                        feature_list.append(inputs)
-
-                # Concatenate all batches
-                val_prediction_sets = torch.cat(
-                    predictions_sets_list, dim=0
-                )  # (N_val x C)
-                val_labels = torch.cat(labels_list, dim=0)  # (N_val,)
-                val_logits = torch.cat(logits_list, dim=0)
-                val_features = torch.cat(feature_list, dim=0)
-
-                # Compute evaluation metrics
-                metric = Metrics()
-
-                metrics = {
-                    "coverage_rate": metric("coverage_rate")(
-                        prediction_sets=val_prediction_sets, labels=val_labels
-                    ),
-                    "average_size": metric("average_size")(
-                        prediction_sets=val_prediction_sets, labels=val_labels
-                    ),
-                    "cov_gap": metric("CovGap")(
-                        prediction_sets=val_prediction_sets,
-                        labels=val_labels,
-                        alpha=alpha,
-                        num_classes=num_classes,
-                    ),
-                    "vio_classes": metric("VioClasses")(
-                        prediction_sets=val_prediction_sets,
-                        labels=val_labels,
-                        alpha=alpha,
-                        num_classes=num_classes,
-                    ),
-                    "diff_violation": metric("DiffViolation")(
-                        val_logits,
-                        prediction_sets=val_prediction_sets,
-                        labels=val_labels,
-                        alpha=alpha,
-                    ),
-                    "sscv": metric("SSCV")(
-                        prediction_sets=val_prediction_sets,
-                        labels=val_labels,
-                        alpha=alpha,
-                    ),
-                    "wsc": metric("WSC")(
-                        val_features,
-                        prediction_sets=val_prediction_sets,
-                        labels=val_labels,
-                    ),
-                }
-
-                print(metrics)
 
                 # conformity_score_name = type(conformity_score).__name__
                 # evaluate_predictions(
@@ -334,40 +334,40 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                 # )
 
             # check with my own implementation
-            predictor = ConformalPredictor(model)
-            predictor.fit(X_cal, y_cal)
+            # predictor = ConformalPredictor(model)
+            # predictor.fit(X_cal, y_cal)
 
-            gradient_updates = predictor.estimator.gradient_updates
-            X_test = preprocessor.transform(X_test_orig)
+            # gradient_updates = predictor.estimator.gradient_updates
+            # X_test = preprocessor.transform(X_test_orig)
 
-            # X_test = X_test.to_numpy()
-            if not isinstance(X_test, np.ndarray):
-                X_test = X_test.toarray()
-            if not isinstance(y_test, np.ndarray):
-                y_test = y_test.toarray()
-            for alpha in alphas:
-                y_pred_crisp, y_pred_set = predictor.predict(X_test, alpha=alpha)
+            # # X_test = X_test.to_numpy()
+            # if not isinstance(X_test, np.ndarray):
+            #     X_test = X_test.toarray()
+            # if not isinstance(y_test, np.ndarray):
+            #     y_test = y_test.toarray()
+            # for alpha in alphas:
+            #     y_pred_crisp, y_pred_set = predictor.predict(X_test, alpha=alpha)
 
-                conformity_score_name = "own_one_minus_phat"
-                evaluate_predictions(
-                    y_test,
-                    y_pred_crisp,
-                    y_pred_set,
-                    conformity_score_name,
-                    alpha,
-                    clf_seed,
-                    mccv_split_seed,
-                    gradient_updates,
-                    result_processor,
-                )
+            #     conformity_score_name = "own_one_minus_phat"
+            #     evaluate_predictions(
+            #         y_test,
+            #         y_pred_crisp,
+            #         y_pred_set,
+            #         conformity_score_name,
+            #         alpha,
+            #         clf_seed,
+            #         mccv_split_seed,
+            #         gradient_updates,
+            #         result_processor,
+            #     )
 
-                result_processor.process_results(
-                    {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
-                )
+            result_processor.process_results(
+                {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
+            )
 
         case "ranker":
             model = LabelRankingModel(
-                input_dim=X_train.shape[1], hidden_dim=16, output_dim=num_classes
+                input_dim=X_train.shape[1], hidden_dims=[16], output_dim=num_classes
             )
             model.fit(
                 X_train,
@@ -379,9 +379,9 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                 val_frac=val_frac,
                 learning_rate=learning_rate,
             )
-            predictor = ConformalPredictor(estimator=model)
+            predictor = ConformalPredictor(model)
             predictor.fit(X_cal, y_cal)
-            gradient_updates = predictor.estimator.gradient_updates
+            gradient_updates = predictor._model.gradient_updates
 
             X_test = preprocessor.transform(X_test_orig)
 
@@ -391,26 +391,28 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             if not isinstance(y_test, np.ndarray):
                 y_test = y_test.toarray()
 
-            predictor
-
+            ds_test = TabularDataset(X_test, y_test)
+            ds_cal = TabularDataset(X_cal, y_cal)
+            test_loader = DataLoader(ds_test)
+            cal_loader = DataLoader(ds_cal)
             for alpha in alphas:
-                y_pred_crisp, y_pred_set = predictor.predict(X_test, alpha=alpha)
-                conformity_score_name = "negative_ranker_skill"
-                evaluate_predictions(
-                    y_test,
-                    y_pred_crisp,
-                    y_pred_set,
-                    conformity_score_name,
+                gradient_updates = predictor._model.gradient_updates
+                evaluate(
+                    predictor,
+                    model,
                     alpha,
+                    "ranker",
+                    test_loader,
+                    num_classes,
                     clf_seed,
                     mccv_split_seed,
                     gradient_updates,
                     result_processor,
                 )
 
-                result_processor.process_results(
-                    {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
-                )
+            result_processor.process_results(
+                {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
+            )
 
 
 if __name__ == "__main__":
