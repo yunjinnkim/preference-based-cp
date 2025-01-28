@@ -142,7 +142,8 @@ class LabelRankingModel(nn.Module):
             if verbose:
                 print(f"Epoch {epoch + 1}/{num_epochs}")
                 print(f"  Train Loss: {train_loss / len(train_loader):.4f}")
-                print(f"  Val Loss: {val_loss / len(val_loader):.4f}")
+                if val_loader:
+                    print(f"  Val Loss: {val_loss / len(val_loader):.4f}")
 
             # Step the scheduler based on validation loss
             if val_loader:
