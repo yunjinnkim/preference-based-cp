@@ -26,15 +26,6 @@ from models.ranking_models import LabelRankingModel
 from sklearn.preprocessing import LabelEncoder
 from conformal.conformal import ConformalPredictor
 
-from mapie.classification import MapieClassifier, BaseClassificationScore
-from mapie.conformity_scores import (
-    NaiveConformityScore,
-    LACConformityScore,
-    APSConformityScore,
-    RAPSConformityScore,
-    TopKConformityScore,
-)
-
 from py_experimenter.database_connector_mysql import (
     DatabaseConnectorMYSQL,
     DatabaseConnector,
@@ -91,9 +82,6 @@ def evaluate_predictions(
     score_f1 = f1_score(y_test, y_pred_crisp, average="macro")
     score_acc = accuracy_score(y_test, y_pred_crisp)
     score_bacc = balanced_accuracy_score(y_test, y_pred_crisp)
-    # score_roc_auc = roc_auc_score(
-    #     y_test, y_pred_crisp, average="macro", multi_class="ovr"
-    # )
 
     # Conformal prediction metrics
     hits = [y_test[i] in y_pred_set[i] for i in range(len(y_test))]
@@ -155,7 +143,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
         case "classifier":
             model = ClassifierModel(
-                input_dim=X_train.shape[1], hidden_dim=16, output_dim=num_classes
+                input_dim=X_train.shape[1], hidden_dim=16, output_dim=10
             )
             model.fit(
                 X_train,
@@ -169,11 +157,8 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             )
 
             conformity_scores = [
-                NaiveConformityScore(),
-                LACConformityScore(),
-                APSConformityScore(),
-                RAPSConformityScore(),
-                TopKConformityScore(),
+                aps,
+                thr,
             ]
             for conformity_score, alpha in product(conformity_scores, alphas):
                 predictor = MapieClassifier(

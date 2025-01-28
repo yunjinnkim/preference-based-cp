@@ -5,16 +5,16 @@ from models.ranking_models import LabelRankingModel
 
 class ConformalPredictor:
 
-    def __init__(self, estimator):
-        self.estimator = estimator
+    def __init__(self, model):
+        self._model = model
 
     def fit(self, X_cal, y_cal, **kwargs):
         self.X_cal = X_cal
         self.y_cal = y_cal
-        if isinstance(self.estimator, LabelRankingModel):
-            y_pred_cal = self.estimator.predict_class_skills(self.X_cal)
+        if isinstance(self._model, LabelRankingModel):
+            y_pred_cal = self._model.predict_class_skills(self.X_cal)
         else:
-            y_pred_cal = self.estimator.predict_proba(self.X_cal)
+            y_pred_cal = self._model.predict_proba(self.X_cal)
         self.scores = 1 - y_pred_cal[np.arange(len(self.y_cal)), self.y_cal]
 
     def predict_set(self, X, alpha=0.2):
@@ -24,10 +24,10 @@ class ConformalPredictor:
             np.clip(np.ceil((n + 1) * (1 - alpha)) / n, 0, 1),
             method="inverted_cdf",
         )
-        if isinstance(self.estimator, LabelRankingModel):
-            y_preds = self.estimator.predict_class_skills(X)
+        if isinstance(self._model, LabelRankingModel):
+            y_preds = self._model.predict_class_skills(X)
         else:
-            y_preds = self.estimator.predict_proba(X)
+            y_preds = self._model.predict_proba(X)
         pred_sets = []
         for y_pred in y_preds:
             pred_set = np.where(1 - y_pred <= self.threshold)[0]
@@ -37,9 +37,19 @@ class ConformalPredictor:
         return pred_sets
 
     def predict(self, X, alpha=0.2):
-        y_crisp = self.estimator.predict(X)
-        y_set = self.predict_set(X, alpha=alpha)
-        return y_crisp, y_set
+        n = len(self.scores)
+        self.threshold = np.quantile(
+            self.scores,
+            np.clip(np.ceil((n + 1) * (1 - alpha)) / n, 0, 1),
+            method="inverted_cdf",
+        )
+        y_pred = self._model(X)
+        return 1 - y_pred <= self.threshold
+
+    # def predict(self, X, alpha=0.2):
+    #     y_crisp = self._model.predict(X)
+    #     y_set = self.predict_set(X, alpha=alpha)
+    #     return y_crisp, y_set
 
 
 class ConformalRankingPredictor:

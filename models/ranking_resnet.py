@@ -12,6 +12,7 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision.models import resnet18
 from torch.optim import Adam
 
+
 class LabelRankingResnet(nn.Module):
     """An image classifier based on a pretrained resnet18."""
 
@@ -21,7 +22,7 @@ class LabelRankingResnet(nn.Module):
         num_ftrs = self.model.fc.in_features
 
         self.model.fc = nn.Linear(num_ftrs, 10)
-        
+
         self.effective_epochs = 0
         self.gradient_updates = 0
 
@@ -34,7 +35,7 @@ class LabelRankingResnet(nn.Module):
         learning_rate=0.01,
         num_epochs=100,
         random_state=None,
-        verbose=False
+        verbose=False,
     ):
         self.classes_ = 10
 
@@ -53,7 +54,7 @@ class LabelRankingResnet(nn.Module):
                 outputs_a = self.model(inputs_a)
                 outputs_b = self.model(inputs_b)
                 # outputs_a, outputs_b = torch.split(outputs, inputs_a.size(0), dim=0)
-                
+
                 outputs_for_labels_a = outputs_a.gather(dim=1, index=labels_a)
                 outputs_for_labels_b = outputs_b.gather(dim=1, index=labels_b)
 
@@ -72,7 +73,7 @@ class LabelRankingResnet(nn.Module):
                 running_loss += loss.item()
                 if verbose:
                     print(f"epoch: {epoch} loss {loss}")
-   
+
     def predict_class_skills(self, X):
         check_is_fitted(self, ["classes_"])
 
