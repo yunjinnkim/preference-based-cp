@@ -100,13 +100,18 @@ class LabelRankingModel(nn.Module):
                 optimizer.zero_grad()
                 outputs = self(inputs)
                 outputs_for_labels = outputs.gather(dim=2, index=labels)
+
+                max_vals = torch.max(outputs_for_labels, dim=1, keepdim=True)[
+                    0
+                ]  # Stabilization
                 loss = (
-                    torch.log(
-                        torch.exp(outputs_for_labels[:, 0])
-                        + torch.exp(outputs_for_labels[:, 1])
+                    max_vals
+                    + torch.log(
+                        torch.exp(outputs_for_labels - max_vals).sum(dim=1) + eps
                     )
                     - outputs_for_labels[:, 0]
                 )
+
                 loss = loss.mean()
                 train_loss += loss.item()
                 loss.backward()
