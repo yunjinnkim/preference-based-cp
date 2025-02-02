@@ -8,13 +8,14 @@ import sys
 
 # sys.path.insert(0, "/dss/dsshome1/04/ra43rid2/rank_cp/")
 
-# sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
-sys.path.insert(0, "/home/jonas/Documents/Research/")
+sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
+# sys.path.insert(0, "/home/jonas/Documents/Research/")
 
 import random
 from math import ceil, log2
 import numpy as np
 import torch
+torch.set_default_device("cpu")
 import openml
 import mysql.connector
 import types
@@ -40,7 +41,6 @@ from py_experimenter.database_connector_mysql import (
     DatabaseConnectorMYSQL,
     DatabaseConnector,
 )
-
 
 def connect(self):
 
@@ -87,6 +87,9 @@ def evaluate(
     mccv_split_seed,
     gradient_updates,
     result_processor,
+    len_train,
+    len_test,
+    len_cal
 ):
 
     predictions_sets_list = []
@@ -126,11 +129,10 @@ def evaluate(
         val_logits = torch.cat(logits_list, dim=0)
         val_features = torch.cat(feature_list, dim=0)
 
-        print(val_prediction_sets)
-
-        y_pred = val_predictions.detach().cpu().numpy()
-        y_true = val_labels.detach().cpu().numpy()
-
+        y_pred = val_predictions
+        y_true = val_labels
+        print(val_labels.device)
+        print(val_prediction_sets.device)
         # Compute evaluation metrics
         metric = Metrics()
 
@@ -153,12 +155,7 @@ def evaluate(
                 alpha=alpha,
                 num_classes=num_classes,
             ),
-            # "diff_violation": metric("DiffViolation")(
-            #     val_logits,
-            #     prediction_sets=val_prediction_sets,
-            #     labels=val_labels,
-            #     alpha=alpha,
-            # ),
+
             "sscv": metric("SSCV")(
                 prediction_sets=val_prediction_sets,
                 labels=val_labels,
@@ -180,6 +177,9 @@ def evaluate(
                 "gradient_updates": gradient_updates,
                 "clf_seed": clf_seed,
                 "mccv_seed": mccv_split_seed,
+                "len_train": len_train,
+                "len_test": len_test,
+                "len_cal": len_cal
             }
         )
 
@@ -297,6 +297,11 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             ds_cal = TabularDataset(X_cal, y_cal)
             test_loader = DataLoader(ds_test)
             cal_loader = DataLoader(ds_cal)
+            
+            len_train = len(X_train)
+            len_test = len(ds_test)
+            len_cal = len(ds_cal)
+
             conformity_scores = [APS(), THR(), TOPK(), RAPS(), SAPS(), Margin()]
             for conformity_score, alpha in product(conformity_scores, alphas):
                 predictor = SplitPredictor(conformity_score, model)
@@ -316,6 +321,9 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                     mccv_split_seed,
                     gradient_updates,
                     result_processor,
+                    len_train,
+                    len_test,
+                    len_cal
                 )
 
                 ### Evaluation
@@ -393,6 +401,11 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
             ds_test = TabularDataset(X_test, y_test)
             ds_cal = TabularDataset(X_cal, y_cal)
+
+            len_train = len(X_train)
+            len_test = len(ds_test)
+            len_cal = len(ds_cal)
+
             test_loader = DataLoader(ds_test)
             cal_loader = DataLoader(ds_cal)
             for alpha in alphas:
@@ -408,6 +421,9 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                     mccv_split_seed,
                     gradient_updates,
                     result_processor,
+                    len_train,
+                    len_test,
+                    len_cal
                 )
 
             result_processor.process_results(
@@ -420,7 +436,7 @@ if __name__ == "__main__":
     print(sys.version)
 
     experimenter = PyExperimenter(
-        experiment_configuration_file_path="./config/cfg_torchcp_simple.yml",
+        experiment_configuration_file_path="./experiments/config/cfg_simple_debug.yml",
         use_codecarbon=False,
     )
 
