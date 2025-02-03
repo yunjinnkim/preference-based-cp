@@ -6,16 +6,13 @@ joblib.parallel_config(backend="multiprocessing")
 import joblib._store_backends
 import sys
 
-# sys.path.insert(0, "/dss/dsshome1/04/ra43rid2/rank_cp/")
-
-sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
-# sys.path.insert(0, "/home/jonas/Documents/Research/")
+sys.path.insert(0, "/home/ra43rid/torch_plnet")
 
 import random
 from math import ceil, log2
 import numpy as np
 import torch
-torch.set_default_device("cpu")
+torch.set_default_device("cuda")
 import openml
 import mysql.connector
 import types
@@ -34,6 +31,7 @@ from torch.utils.data import DataLoader
 from conformal.conformal import ConformalPredictor
 
 from torchcp.classification.score import APS, THR, TOPK, RAPS, SAPS, Margin, KNN
+from conformal.conformal import IDENTITY, OWN_APS
 from torchcp.classification.predictor import SplitPredictor
 from torchcp.classification import Metrics
 
@@ -129,10 +127,8 @@ def evaluate(
         val_logits = torch.cat(logits_list, dim=0)
         val_features = torch.cat(feature_list, dim=0)
 
-        y_pred = val_predictions
-        y_true = val_labels
-        print(val_labels.device)
-        print(val_prediction_sets.device)
+        y_pred = val_predictions.detach().cpu().numpy()
+        y_true = val_labels.detach().cpu().numpy()
         # Compute evaluation metrics
         metric = Metrics()
 
@@ -274,6 +270,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             model = ClassifierModel(
                 input_dim=X_train.shape[1], hidden_dim=16, output_dim=num_classes
             )
+            # model.cuda()
             model.fit(
                 X_train,
                 y_train,
@@ -302,8 +299,9 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             len_test = len(ds_test)
             len_cal = len(ds_cal)
 
-            conformity_scores = [APS(), THR(), TOPK(), RAPS(), SAPS(), Margin()]
-            for conformity_score, alpha in product(conformity_scores, alphas):
+            names = ["rand_aps", "aps", "thr", "topk", "raps", "saps", "margin"]
+            conformity_scores = [APS(randomized=True), APS(randomized=False), THR(), TOPK(), RAPS(), SAPS(), Margin()]
+            for (name, conformity_score), alpha in product(zip(names,conformity_scores), alphas):
                 predictor = SplitPredictor(conformity_score, model)
 
                 gradient_updates = predictor._model.gradient_updates
@@ -387,9 +385,15 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                 val_frac=val_frac,
                 learning_rate=learning_rate,
             )
-            predictor = ConformalPredictor(model)
-            predictor.fit(X_cal, y_cal)
-            gradient_updates = predictor._model.gradient_updates
+            # predictor = ConformalPredictor(model)
+            # predictor.fit(X_cal, y_cal)
+
+            predictor_vanilla = SplitPredictor(IDENTITY(), model)
+            predictor_own_aps = SplitPredictor(OWN_APS(randomized=False),model)
+            predictor_own_randomized_aps = SplitPredictor(OWN_APS(randomized=True),model)
+
+            predictors = [predictor_vanilla, predictor_own_aps, predictor_own_randomized_aps]
+            names = ["ranker_vanilla", "ranker_own_aps", "ranker_own_rand_aps"]
 
             X_test = preprocessor.transform(X_test_orig)
 
@@ -408,13 +412,15 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
             test_loader = DataLoader(ds_test)
             cal_loader = DataLoader(ds_cal)
-            for alpha in alphas:
-                gradient_updates = predictor._model.gradient_updates
+            for (name, predictor), alpha in product(zip(names,predictors), alphas):
+                gradient_updates = predictor_vanilla._model.gradient_updates
+                predictor.calibrate(cal_loader, alpha)
+
                 evaluate(
                     predictor,
                     model,
                     alpha,
-                    "ranker",
+                    name,
                     test_loader,
                     num_classes,
                     clf_seed,
@@ -430,13 +436,12 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                 {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
             )
 
-
 if __name__ == "__main__":
 
     print(sys.version)
 
     experimenter = PyExperimenter(
-        experiment_configuration_file_path="./experiments/config/cfg_simple_debug.yml",
+        experiment_configuration_file_path="./config/cfg_simple_debug.yml",
         use_codecarbon=False,
     )
 

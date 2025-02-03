@@ -1,7 +1,9 @@
 import numpy as np
 
 from models.ranking_models import LabelRankingModel
-
+from torchcp.classification.score.base import BaseScore
+from torchcp.classification.score.aps import APS, THR
+import torch
 
 class ConformalPredictor:
 
@@ -39,7 +41,7 @@ class ConformalPredictor:
     def predict(self, X, alpha=0.2):
         n = len(self.scores)
         self.threshold = np.quantile(
-            self.scores,
+            self.scores.detach().cpu().numpy(),
             np.clip(np.ceil((n + 1) * (1 - alpha)) / n, 0, 1),
             method="inverted_cdf",
         )
@@ -109,3 +111,103 @@ class ConformalRankingPredictor:
             pred_set = np.where(-y_skill <= self.threshold)[0]
             pred_sets.append(pred_set)
         return pred_sets
+
+
+
+class IDENTITY(BaseScore):
+    """
+    Identity conformal score for ranking 
+    """
+    
+    def __init__(self):
+        super().__init__()
+
+    def __call__(self, logits, label=None):
+        """
+        Calculate non-conformity scores for logits.
+
+        Args:
+            logits (torch.Tensor): The logits output from the model.
+            label (torch.Tensor, optional): The ground truth label. Default is None.
+
+        Returns:
+            torch.Tensor: The non-conformity scores.
+        """
+
+        if len(logits.shape) > 2:
+            raise ValueError("dimension of logits are at most 2.")
+
+        if len(logits.shape) == 1:
+            logits = logits.unsqueeze(0)
+        probs = logits
+        if label is None:
+            return self._calculate_all_label(probs)
+        else:
+            return self._calculate_single_label(probs, label)
+
+    def _calculate_single_label(self, probs, label):
+        """
+        Calculate non-conformity score for a single label.
+
+        Args:
+            probs (torch.Tensor): The prediction probabilities.
+            label (torch.Tensor): The ground truth label.
+
+        Returns:
+            torch.Tensor: The non-conformity score for the given label.
+        """
+        return - probs[torch.arange(probs.shape[0], device=probs.device), label]
+
+    def _calculate_all_label(self, probs):
+        """
+        Calculate non-conformity scores for all labels.
+
+        Args:
+            probs (torch.Tensor): The prediction probabilities.
+
+        Returns:
+            torch.Tensor: The non-conformity scores.
+        """
+        return - probs
+
+
+class OWN_APS(IDENTITY):
+    """
+    Identity conformal score for ranking 
+    """
+    
+    def __init__(self, randomized = True):
+        super().__init__()
+        self.aps = APS(score_type="identity", randomized=randomized)
+
+    def _calculate_single_label(self, probs, label):
+        """
+        Calculate non-conformity score for a single label.
+
+        Args:
+            probs (torch.Tensor): The prediction probabilities.
+            label (torch.Tensor): The ground truth label.
+
+        Returns:
+            torch.Tensor: The non-conformity score for the given label.
+        """
+
+        # transform utilities
+        skills_from_model = probs
+        skills_from_model = (skills_from_model - skills_from_model.min()) / (skills_from_model.max() - skills_from_model.min()) 
+        return self.aps._calculate_single_label(skills_from_model, label)
+
+    def _calculate_all_label(self, probs):
+        """
+        Calculate non-conformity scores for all labels.
+
+        Args:
+            probs (torch.Tensor): The prediction probabilities.
+
+        Returns:
+            torch.Tensor: The non-conformity scores.
+        """
+        # transform utilities
+        skills_from_model = probs
+        skills_from_model = (skills_from_model - skills_from_model.min()) / (skills_from_model.max() - skills_from_model.min()) 
+        return self.aps._calculate_all_label(skills_from_model)

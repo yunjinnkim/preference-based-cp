@@ -202,7 +202,7 @@ class LabelRankingModel(nn.Module):
             )
         else:
             dataset = LabelPairDataset(X, y, num_classes=self.num_classes)
-        gen = torch.Generator().manual_seed(random_state)
+        gen = torch.Generator(device=torch.get_default_device()).manual_seed(random_state)
 
         train_dataset, val_dataset = random_split(
             dataset, [1 - val_frac, val_frac], generator=gen
@@ -225,7 +225,7 @@ class LabelRankingModel(nn.Module):
         self.eval()
         with torch.no_grad():
             skills = self.forward(torch.tensor(X, dtype=torch.float32))
-        return skills.detach().cpu().numpy()
+        return skills
 
     def predict(self, X):
         """sklearn style predict function
@@ -417,7 +417,7 @@ class DyadRankingModel(nn.Module):
         with torch.no_grad():
             preds = self(dyads)
             class_preds = preds.view(-1, self.num_classes).argmax(axis=1)
-        return class_preds.detach().cpu().numpy()
+        return class_preds
 
     def predict_class_skills(self, X):
         """Convenience function that allows to use the ranker as an sklearn style classifier
@@ -431,4 +431,4 @@ class DyadRankingModel(nn.Module):
         with torch.no_grad():
             skills = self(dyads)
             class_skills = skills.view(-1, self.num_classes)
-        return class_skills.detach().cpu().numpy()
+        return class_skills
