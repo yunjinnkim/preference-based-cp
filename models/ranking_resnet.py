@@ -38,6 +38,7 @@ class LabelRankingResnet(nn.Module):
         verbose=False,
     ):
         self.classes_ = 10
+        device = "cuda"
 
         optimizer = Adam(self.model.parameters(), lr=learning_rate)
 
@@ -45,7 +46,7 @@ class LabelRankingResnet(nn.Module):
             self.model.train()
             running_loss = 0.0
             for inputs_a, labels_a, inputs_b, labels_b in pairset_loader:
-                # inputs_a, labels_a, inputs_b, labels_b  = inputs_a.to(device), labels_a.to(device), inputs_b.to(device), labels_b.to(device)
+                inputs_a, labels_a, inputs_b, labels_b  = inputs_a.to(device), labels_a.to(device), inputs_b.to(device), labels_b.to(device)
                 labels_a = labels_a.unsqueeze(-1)
                 labels_b = labels_b.unsqueeze(-1)
                 optimizer.zero_grad()
@@ -66,6 +67,7 @@ class LabelRankingResnet(nn.Module):
                     )
                     - outputs_for_labels_a
                 )
+
                 loss = loss.mean()
                 loss.backward()
                 optimizer.step()
@@ -82,7 +84,7 @@ class LabelRankingResnet(nn.Module):
         self.eval()
         with torch.no_grad():
             skills = self.forward(torch.tensor(X, dtype=torch.float32))
-        return skills.detach().cpu().numpy()
+        return skills
 
     def predict(self, X):
         """sklearn style predict function
