@@ -926,3 +926,990 @@ TypeError: unsupported operand type(s) for -: 'int' and 'tuple'
 2024-11-14 22:39:30,745  | py-experimenter - WARNING  | No codecarbon section defined in config
 2024-11-14 22:39:30,746  | py-experimenter - INFO     | Initialized and connected to database
 2024-11-14 22:39:30,783  | py-experimenter - INFO     | 1104 rows successfully added to database. 96 rows were skipped.
+2025-01-25 23:15:54,111  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-25 23:15:54,112  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-25 23:15:54,112  | py-experimenter - INFO     | Found 1 logtables
+2025-01-25 23:15:54,113  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-25 23:15:54,113  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-25 23:15:54,113  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-25 23:15:54,113  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-25 23:15:54,166  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-25 23:16:06,807  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 237, in worker
+    conformity_scores = [APS(), THR(), TOPK(), RAPS(), SAPS(), Margin(), KNN()]
+                                                                         ^^^^^
+TypeError: KNN.__init__() missing 3 required positional arguments: 'features', 'labels', and 'num_classes'
+
+2025-01-25 23:16:06,936  | py-experimenter - INFO     | All configured executions finished.
+2025-01-25 23:16:36,645  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-25 23:16:36,645  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-25 23:16:36,646  | py-experimenter - INFO     | Found 1 logtables
+2025-01-25 23:16:36,646  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-25 23:16:36,646  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-25 23:16:36,646  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-25 23:16:36,647  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-25 23:16:36,648  | py-experimenter - INFO     | No rows to add. All the 1 experiments already exist.
+2025-01-25 23:16:37,227  | py-experimenter - INFO     | All configured executions finished.
+2025-01-25 23:17:07,379  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-25 23:17:07,379  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-25 23:17:07,379  | py-experimenter - INFO     | Found 1 logtables
+2025-01-25 23:17:07,379  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-25 23:17:07,379  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-25 23:17:07,379  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-25 23:17:07,380  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-25 23:17:07,440  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-25 23:17:19,157  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:29:10,450  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:29:10,451  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:29:10,451  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:29:10,451  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:29:10,451  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:29:10,451  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:29:10,452  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:29:10,510  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:29:20,965  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 259, in worker
+    inputs = batch[0].to(torch.get_default_device())
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/torch/__init__.py", line 1938, in __getattr__
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
+AttributeError: module 'torch' has no attribute 'get_default_device'
+
+2025-01-26 00:29:21,066  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:29:59,670  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:29:59,671  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:29:59,671  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:29:59,671  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:29:59,671  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:29:59,671  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:29:59,671  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:29:59,672  | py-experimenter - INFO     | No rows to add. All the 1 experiments already exist.
+2025-01-26 00:30:00,148  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:30:13,771  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:30:13,772  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:30:13,772  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:30:13,772  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:30:13,772  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:30:13,772  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:30:13,772  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:30:13,830  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:30:21,478  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 291, in worker
+    "cov_gap": metric("CovGap")(val_prediction_sets, val_labels, alpha),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CovGap() missing 1 required positional argument: 'num_classes'
+
+2025-01-26 00:30:21,577  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:31:53,005  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:31:53,006  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:31:53,006  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:31:53,006  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:31:53,006  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:31:53,006  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:31:53,007  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:31:53,067  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:32:03,944  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 294, in worker
+    "vio_classes": metric("VioClasses")(
+                   ^^^^^^^^^^^^^^^^^^^^^
+TypeError: VioClasses() missing 1 required positional argument: 'num_classes'
+
+2025-01-26 00:32:04,054  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:32:36,541  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:32:36,541  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:32:36,542  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:32:36,542  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:32:36,542  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:32:36,542  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:32:36,542  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:32:36,604  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:32:44,547  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 297, in worker
+    "diff_violation": metric("DiffViolation")(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: DiffViolation() missing 1 required positional argument: 'alpha'
+
+2025-01-26 00:32:44,651  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:33:11,018  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:33:11,018  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:33:11,019  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:33:11,019  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:33:11,019  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:33:11,019  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:33:11,020  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:33:11,081  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:33:19,819  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 301, in worker
+    "wsc": metric("WSC")(val_features, val_prediction_sets, val_labels),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/torchcp/classification/utils/metrics.py", line 311, in WSC
+    raise ValueError(
+ValueError: Number of classes mismatch: prediction_sets has 6 classes but labels has 5 unique classes
+
+2025-01-26 00:33:19,939  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:34:38,849  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:34:38,849  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:34:38,850  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:34:38,850  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:34:38,850  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:34:38,850  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:34:38,850  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:34:38,874  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:34:50,167  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 00:37:54,911  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 00:37:54,911  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 00:37:54,912  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 00:37:54,912  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 00:37:54,912  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 00:37:54,912  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 00:37:54,912  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 00:37:54,973  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 00:38:31,527  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 11:32:13,872  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 11:32:13,873  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 11:32:13,873  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 11:32:13,873  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 11:32:13,874  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 11:32:13,874  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 11:32:13,874  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 11:32:13,933  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 11:32:22,394  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 331, in worker
+    f1 = f1_score(y_true, y_pred)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 213, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/metrics/_classification.py", line 1293, in f1_score
+    return fbeta_score(
+           ^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 186, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/metrics/_classification.py", line 1485, in fbeta_score
+    _, _, f, _ = precision_recall_fscore_support(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 186, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/metrics/_classification.py", line 1789, in precision_recall_fscore_support
+    labels = _check_set_wise_labels(y_true, y_pred, average, labels, pos_label)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/sklearn/metrics/_classification.py", line 1578, in _check_set_wise_labels
+    raise ValueError(
+ValueError: Target is multiclass but average='binary'. Please choose another average setting, one of [None, 'micro', 'macro', 'weighted'].
+
+2025-01-26 11:32:22,497  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 11:32:52,082  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 11:32:52,082  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 11:32:52,083  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 11:32:52,083  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 11:32:52,083  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 11:32:52,083  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 11:32:52,084  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 11:32:52,142  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 11:33:04,206  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 12:00:26,590  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 12:00:26,590  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 12:00:26,591  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 12:00:26,591  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 12:00:26,591  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 12:00:26,591  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 12:00:26,592  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 12:00:26,641  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 12:00:33,849  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 144, in worker
+    X, y, _, _ = dataset.get_data(
+                 ^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 803, in get_data
+    data, categorical, attribute_names = self._load_data()
+                                         ^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 594, in _load_data
+    return self._cache_compressed_file_from_file(Path(file_to_load))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 539, in _cache_compressed_file_from_file
+    attribute_names, categorical, data = self._parse_data_from_file(data_file)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 571, in _parse_data_from_file
+    raise ValueError(f"Unknown file type for file '{data_file}'.")
+ValueError: Unknown file type for file 'None'.
+
+2025-01-26 12:00:33,938  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 12:01:36,203  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 12:01:36,204  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 12:01:36,204  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 12:01:36,204  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 12:01:36,204  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 12:01:36,205  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 12:01:36,205  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 12:01:36,228  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 12:01:43,259  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 144, in worker
+    X, y, _, _ = dataset.get_data(
+                 ^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 803, in get_data
+    data, categorical, attribute_names = self._load_data()
+                                         ^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 594, in _load_data
+    return self._cache_compressed_file_from_file(Path(file_to_load))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 539, in _cache_compressed_file_from_file
+    attribute_names, categorical, data = self._parse_data_from_file(data_file)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/openml/datasets/dataset.py", line 571, in _parse_data_from_file
+    raise ValueError(f"Unknown file type for file '{data_file}'.")
+ValueError: Unknown file type for file 'None'.
+
+2025-01-26 12:01:43,375  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 12:02:01,190  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 12:02:01,191  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 12:02:01,192  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 12:02:01,193  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 12:02:01,193  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 12:02:01,193  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 12:02:01,194  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 12:02:01,211  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 12:04:22,537  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 12:04:22,537  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 12:04:22,537  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 12:04:22,537  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 12:04:22,537  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 12:04:22,537  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 12:04:22,538  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 12:04:22,590  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 12:04:32,104  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 281, in worker
+    val_predictions = torch.cat(predictions_list, dim=0)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: zero-dimensional tensor (at position 0) cannot be concatenated
+
+2025-01-26 12:04:35,817  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 281, in worker
+    val_predictions = torch.cat(predictions_list, dim=0)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: zero-dimensional tensor (at position 0) cannot be concatenated
+
+2025-01-26 12:04:35,873  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 14:25:40,392  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 14:25:40,392  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 14:25:40,393  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 14:25:40,393  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 14:25:40,393  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 14:25:40,393  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 14:25:40,394  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 14:25:40,455  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 14:25:51,237  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 282, in worker
+    val_predictions = torch.cat(predictions_list, dim=0)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: zero-dimensional tensor (at position 0) cannot be concatenated
+
+2025-01-26 14:25:52,881  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 282, in worker
+    val_predictions = torch.cat(predictions_list, dim=0)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: zero-dimensional tensor (at position 0) cannot be concatenated
+
+2025-01-26 14:25:52,922  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 14:27:01,765  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 14:27:01,765  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 14:27:01,765  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 14:27:01,765  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 14:27:01,765  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 14:27:01,765  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 14:27:01,765  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 14:27:01,818  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 14:27:11,210  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 270, in worker
+    # Accumulate predictions and labels
+          ^^^^^
+NameError: name 'label' is not defined
+
+2025-01-26 14:27:14,445  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 270, in worker
+    # Accumulate predictions and labels
+          ^^^^^
+NameError: name 'label' is not defined
+
+2025-01-26 14:27:14,493  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 14:27:22,089  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 14:27:22,089  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 14:27:22,089  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 14:27:22,089  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 14:27:22,089  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 14:27:22,089  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 14:27:22,089  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 14:27:22,142  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 14:27:41,354  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 18:33:07,715  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 18:33:07,716  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 18:33:07,716  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 18:33:07,716  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 18:33:07,716  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 18:33:07,716  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 18:33:07,717  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 18:33:07,772  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 18:33:58,083  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 335, in worker
+    evaluate_predictions(
+    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'evaluate_predictions' is not defined
+
+2025-01-26 18:35:36,063  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 335, in worker
+    evaluate_predictions(
+    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'evaluate_predictions' is not defined
+
+2025-01-26 18:35:36,386  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 335, in worker
+    evaluate_predictions(
+    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'evaluate_predictions' is not defined
+
+2025-01-26 18:35:36,414  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 335, in worker
+    evaluate_predictions(
+    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'evaluate_predictions' is not defined
+
+2025-01-26 18:35:36,601  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 335, in worker
+    evaluate_predictions(
+    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'evaluate_predictions' is not defined
+
+2025-01-26 18:35:36,669  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 335, in worker
+    evaluate_predictions(
+    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'evaluate_predictions' is not defined
+
+2025-01-26 18:35:36,698  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 18:36:37,174  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 18:36:37,174  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 18:36:37,175  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 18:36:37,175  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 18:36:37,175  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 18:36:37,175  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 18:36:37,175  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 18:36:37,234  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 18:36:46,522  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 304, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 182, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 18:36:48,791  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 304, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 182, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 18:36:48,851  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 18:46:44,161  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 18:46:44,161  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 18:46:44,161  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 18:46:44,161  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 18:46:44,161  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 18:46:44,161  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 18:46:44,161  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 18:46:44,218  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 18:47:08,804  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 18:48:05,361  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 18:48:05,554  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 18:48:05,639  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 18:48:05,679  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 19:01:20,007  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 19:01:20,007  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 19:01:20,008  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 19:01:20,008  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 19:01:20,008  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 19:01:20,008  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 19:01:20,008  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 19:01:20,061  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 19:01:38,923  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 19:02:07,733  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 19:02:07,762  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 78, in process_logs
+    if not self._valid_logtable_logs(logs):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 98, in _valid_logtable_logs
+    for column, _ in logtable_entries.items():
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'items'
+
+2025-01-26 19:02:07,790  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 19:18:13,889  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 19:18:13,889  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 19:18:13,889  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 19:18:13,889  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 19:18:13,889  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 19:18:13,889  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 19:18:13,889  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 19:18:13,944  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 19:18:26,541  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 57, in execute
+    cursor.execute(sql_statement, values)
+sqlite3.ProgrammingError: Error binding parameter 5: type 'tuple' is not supported
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 89, in process_logs
+    self.db_connector.execute_queries(queries)
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 377, in execute_queries
+    self.execute(cursor, query[0], tuple(query[1]))
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 59, in execute
+    raise DatabaseConnectionError(f"error \n{e}\n raised when executing sql statement.")
+py_experimenter.exceptions.DatabaseConnectionError: error 
+Error binding parameter 5: type 'tuple' is not supported
+ raised when executing sql statement.
+
+2025-01-26 19:18:33,653  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 57, in execute
+    cursor.execute(sql_statement, values)
+sqlite3.ProgrammingError: Error binding parameter 5: type 'tuple' is not supported
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 89, in process_logs
+    self.db_connector.execute_queries(queries)
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 377, in execute_queries
+    self.execute(cursor, query[0], tuple(query[1]))
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 59, in execute
+    raise DatabaseConnectionError(f"error \n{e}\n raised when executing sql statement.")
+py_experimenter.exceptions.DatabaseConnectionError: error 
+Error binding parameter 5: type 'tuple' is not supported
+ raised when executing sql statement.
+
+2025-01-26 19:18:33,712  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 19:20:09,185  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 19:20:09,185  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 19:20:09,185  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 19:20:09,185  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 19:20:09,186  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 19:20:09,186  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 19:20:09,186  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 19:20:09,237  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 19:20:39,060  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 19:20:39,061  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 19:20:39,061  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 19:20:39,061  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 19:20:39,061  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 19:20:39,061  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 19:20:39,061  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 19:20:39,114  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 19:21:01,298  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 19:28:31,083  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 19:28:31,084  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 19:28:31,084  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 19:28:31,084  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 19:28:31,084  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 19:28:31,084  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 19:28:31,084  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 19:28:31,085  | py-experimenter - INFO     | No rows to add. All the 2 experiments already exist.
+2025-01-26 19:28:31,378  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 19:28:44,151  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 19:28:44,151  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 19:28:44,151  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 19:28:44,151  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 19:28:44,152  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 19:28:44,152  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 19:28:44,152  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 19:28:44,204  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 19:29:10,489  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 20:31:52,842  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:31:52,842  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:31:52,842  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:31:52,842  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:31:52,842  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:31:52,842  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:31:52,843  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:31:52,886  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 20:33:56,670  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 20:38:51,726  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:38:51,727  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:38:51,727  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:38:51,727  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:38:51,727  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:38:51,727  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:38:51,727  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:38:51,748  | py-experimenter - INFO     | 2 rows successfully added to database. 2 rows were skipped.
+2025-01-26 20:38:52,059  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 366, in worker
+    model = LabelRankingModel(
+            ^^^^^^^^^^^^^^^^^^
+TypeError: LabelRankingModel.__init__() got an unexpected keyword argument 'hidden_dim'
+
+2025-01-26 20:38:52,107  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 366, in worker
+    model = LabelRankingModel(
+            ^^^^^^^^^^^^^^^^^^
+TypeError: LabelRankingModel.__init__() got an unexpected keyword argument 'hidden_dim'
+
+2025-01-26 20:38:52,186  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 20:39:24,595  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:39:24,595  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:39:24,595  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:39:24,595  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:39:24,595  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:39:24,595  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:39:24,596  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:39:24,650  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2025-01-26 20:39:25,174  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 366, in worker
+    model = LabelRankingModel(
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/models/ranking_models.py", line 56, in __init__
+    for hidden_size in hidden_dims:
+TypeError: 'int' object is not iterable
+
+2025-01-26 20:39:25,258  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 366, in worker
+    model = LabelRankingModel(
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/models/ranking_models.py", line 56, in __init__
+    for hidden_size in hidden_dims:
+TypeError: 'int' object is not iterable
+
+2025-01-26 20:40:21,475  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 20:42:55,923  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:42:55,923  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:42:55,923  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:42:55,923  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:42:55,923  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:42:55,924  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:42:55,924  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:42:55,975  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2025-01-26 20:42:59,703  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 384, in worker
+    if not isinstance(X_test, np.ndarray):
+                      ^^^^^^
+UnboundLocalError: cannot access local variable 'X_test' where it is not associated with a value
+
+2025-01-26 20:43:00,180  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 384, in worker
+    if not isinstance(X_test, np.ndarray):
+                      ^^^^^^
+UnboundLocalError: cannot access local variable 'X_test' where it is not associated with a value
+
+2025-01-26 20:43:14,380  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 384, in worker
+    if not isinstance(X_test, np.ndarray):
+                      ^^^^^^
+UnboundLocalError: cannot access local variable 'X_test' where it is not associated with a value
+
+2025-01-26 20:45:22,635  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 20:46:18,652  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:46:18,652  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:46:18,652  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:46:18,652  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:46:18,652  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:46:18,652  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:46:18,652  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:46:18,696  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2025-01-26 20:46:21,947  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 396, in worker
+    gradient_updates = predictor._model.gradient_updates
+                       ^^^^^^^^^^^^^^^^
+AttributeError: 'ConformalPredictor' object has no attribute '_model'
+
+2025-01-26 20:46:23,706  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 396, in worker
+    gradient_updates = predictor._model.gradient_updates
+                       ^^^^^^^^^^^^^^^^
+AttributeError: 'ConformalPredictor' object has no attribute '_model'
+
+2025-01-26 20:46:34,335  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 396, in worker
+    gradient_updates = predictor._model.gradient_updates
+                       ^^^^^^^^^^^^^^^^
+AttributeError: 'ConformalPredictor' object has no attribute '_model'
+
+2025-01-26 20:46:38,357  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 20:50:23,903  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:50:23,903  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:50:23,903  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:50:23,903  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:50:23,903  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:50:23,903  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:50:23,903  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:50:23,950  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2025-01-26 20:50:27,224  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 379, in worker
+    predictor = ConformalPredictor(estimator=model)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConformalPredictor.__init__() got an unexpected keyword argument 'estimator'
+
+2025-01-26 20:50:27,319  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 379, in worker
+    predictor = ConformalPredictor(estimator=model)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConformalPredictor.__init__() got an unexpected keyword argument 'estimator'
+
+2025-01-26 20:50:44,697  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 379, in worker
+    predictor = ConformalPredictor(estimator=model)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConformalPredictor.__init__() got an unexpected keyword argument 'estimator'
+
+2025-01-26 20:50:44,976  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 379, in worker
+    predictor = ConformalPredictor(estimator=model)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ConformalPredictor.__init__() got an unexpected keyword argument 'estimator'
+
+2025-01-26 20:51:09,746  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 57, in execute
+    cursor.execute(sql_statement, values)
+sqlite3.OperationalError: no such table: cp_rank_dev__new_cross__results
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 305, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 183, in evaluate
+    result_processor.process_logs({"results": metrics})
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/result_processor.py", line 89, in process_logs
+    self.db_connector.execute_queries(queries)
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 377, in execute_queries
+    self.execute(cursor, query[0], tuple(query[1]))
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/database_connector.py", line 59, in execute
+    raise DatabaseConnectionError(f"error \n{e}\n raised when executing sql statement.")
+py_experimenter.exceptions.DatabaseConnectionError: error 
+no such table: cp_rank_dev__new_cross__results
+ raised when executing sql statement.
+
+2025-01-26 20:51:20,393  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 20:51:20,393  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 20:51:20,393  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 20:51:20,393  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 20:51:20,393  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 20:51:20,393  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 20:51:20,394  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 20:51:20,449  | py-experimenter - INFO     | 4 rows successfully added to database. 0 rows were skipped.
+2025-01-26 20:51:25,646  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 397, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 120, in evaluate
+    val_prediction_sets = torch.cat(predictions_sets_list, dim=0)  # (N_val x C)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected Tensor as element 0 in argument 0, but got tuple
+
+2025-01-26 20:51:48,312  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 397, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 120, in evaluate
+    val_prediction_sets = torch.cat(predictions_sets_list, dim=0)  # (N_val x C)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected Tensor as element 0 in argument 0, but got tuple
+
+2025-01-26 20:53:47,832  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 21:20:48,655  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 21:20:48,655  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 21:20:48,656  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 21:20:48,656  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 21:20:48,656  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 21:20:48,656  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 21:20:48,657  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 21:20:48,715  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 21:20:52,851  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 397, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 120, in evaluate
+    val_prediction_sets = torch.cat(predictions_sets_list, dim=0)  # (N_val x C)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected Tensor as element 0 in argument 0, but got tuple
+
+2025-01-26 21:21:08,550  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 397, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 120, in evaluate
+    val_prediction_sets = torch.cat(predictions_sets_list, dim=0)  # (N_val x C)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected Tensor as element 0 in argument 0, but got tuple
+
+2025-01-26 21:21:08,846  | py-experimenter - ERROR    | Traceback (most recent call last):
+  File "/home/jonas/anaconda3/envs/plnet/lib/python3.11/site-packages/py_experimenter/experimenter.py", line 433, in _execute_experiment
+    final_status = experiment_function(keyfield_values, result_processor, self.config.custom_configuration.custom_values)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 397, in worker
+    evaluate(
+  File "/home/jonas/Documents/Research/torch_plnet/experiments/simple_experiment_torchcp.py", line 120, in evaluate
+    val_prediction_sets = torch.cat(predictions_sets_list, dim=0)  # (N_val x C)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected Tensor as element 0 in argument 0, but got tuple
+
+2025-01-26 21:21:08,900  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 21:29:54,195  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 21:29:54,195  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 21:29:54,196  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 21:29:54,196  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 21:29:54,197  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 21:29:54,197  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 21:29:54,198  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 21:29:54,252  | py-experimenter - INFO     | 2 rows successfully added to database. 0 rows were skipped.
+2025-01-26 21:30:15,194  | py-experimenter - INFO     | All configured executions finished.
+2025-01-26 21:45:03,756  | py-experimenter - INFO     | Found 4 keyfields
+2025-01-26 21:45:03,756  | py-experimenter - INFO     | Found 2 resultfields
+2025-01-26 21:45:03,757  | py-experimenter - INFO     | Found 1 logtables
+2025-01-26 21:45:03,757  | py-experimenter - INFO     | Found logtable cp_rank_dev__new_cross__results
+2025-01-26 21:45:03,757  | py-experimenter - WARNING  | No custom section defined in config
+2025-01-26 21:45:03,757  | py-experimenter - WARNING  | No codecarbon section defined in config
+2025-01-26 21:45:03,758  | py-experimenter - INFO     | Initialized and connected to database
+2025-01-26 21:45:03,815  | py-experimenter - INFO     | 1 rows successfully added to database. 0 rows were skipped.
+2025-01-26 21:45:36,110  | py-experimenter - INFO     | All configured executions finished.

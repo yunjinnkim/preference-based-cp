@@ -14,7 +14,7 @@ PY_EXPERIMENTER:
             # values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
           openml_id:
             type: INTEGER
-            values: [35,41,54,61, 187, 15, 31, 4534]
+            values: [35,54,61, 187, 15, 31, 4534]
             # values: [41]
           master_seed:
             type: Integer
