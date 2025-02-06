@@ -17,21 +17,32 @@ from sklearn.utils.validation import check_is_fitted
 
 class ClassifierModel(nn.Module, ClassifierMixin, BaseEstimator):
     """Simple neural network for classification"""
-
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dims, output_dim, activations=None):
         super(ClassifierModel, self).__init__()
-        self.input = nn.Linear(input_dim, hidden_dim)
-        self.hidden = nn.Linear(hidden_dim, output_dim)
-        self.sigmoid = nn.Sigmoid()
-        self.effective_epochs = 0
-        self.gradient_updates = 0
-        self.fitted = False
+
+        layers = []
+        in_features = input_dim
+
+        if activations:
+            for hidden_size, activation in zip(hidden_dims, activations):
+                layers.append(nn.Linear(in_features, hidden_size))
+                layers.append(activation)  # Add activation function
+                in_features = hidden_size
+        else:
+
+            for hidden_size in hidden_dims:
+                layers.append(nn.Linear(in_features, hidden_size))
+                layers.append(nn.Sigmoid())  # Add activation function
+                in_features = hidden_size
+
+        # Add the final output layer
+        layers.append(nn.Linear(in_features, output_dim))
+
+        # Combine all layers into a single nn.Sequential module
+        self.network = nn.Sequential(*layers)
 
     def forward(self, x):
-        x = self.input(x)
-        x = self.sigmoid(x)
-        x = self.hidden(x)
-        return x
+        return self.network(x)
 
     def _fit(
         self,
