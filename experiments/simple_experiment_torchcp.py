@@ -324,49 +324,6 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                     len_cal
                 )
 
-                ### Evaluation
-
-                # conformity_score_name = type(conformity_score).__name__
-                # evaluate_predictions(
-                #     y_test,
-                #     y_pred_crisp,
-                #     y_pred_set,
-                #     conformity_score_name,
-                #     alpha,
-                #     clf_seed,
-                #     mccv_split_seed,
-                #     gradient_updates,
-                #     result_processor,
-                # )
-
-            # check with my own implementation
-            # predictor = ConformalPredictor(model)
-            # predictor.fit(X_cal, y_cal)
-
-            # gradient_updates = predictor.estimator.gradient_updates
-            # X_test = preprocessor.transform(X_test_orig)
-
-            # # X_test = X_test.to_numpy()
-            # if not isinstance(X_test, np.ndarray):
-            #     X_test = X_test.toarray()
-            # if not isinstance(y_test, np.ndarray):
-            #     y_test = y_test.toarray()
-            # for alpha in alphas:
-            #     y_pred_crisp, y_pred_set = predictor.predict(X_test, alpha=alpha)
-
-            #     conformity_score_name = "own_one_minus_phat"
-            #     evaluate_predictions(
-            #         y_test,
-            #         y_pred_crisp,
-            #         y_pred_set,
-            #         conformity_score_name,
-            #         alpha,
-            #         clf_seed,
-            #         mccv_split_seed,
-            #         gradient_updates,
-            #         result_processor,
-            #     )
-
             result_processor.process_results(
                 {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
             )
