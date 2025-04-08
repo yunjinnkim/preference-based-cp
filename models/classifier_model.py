@@ -92,22 +92,31 @@ class ClassifierModel(nn.Module, ClassifierMixin, BaseEstimator):
             # Validation step
             self.eval()
             val_loss = 0
-            with torch.no_grad():
-                for val_inputs, val_labels in val_loader:
-                    val_outputs = self(val_inputs)
-                    val_loss += loss_fn(val_outputs, val_labels).item()
-            val_loss /= len(val_loader)
+
+            # Validation step
+            if val_loader is not None:
+                self.eval()
+                val_loss = 0
+                with torch.no_grad():
+                    for val_inputs, val_labels in val_loader:
+                        val_outputs = self(val_inputs)
+                        val_loss += loss_fn(val_outputs, val_labels).item()
+                val_loss /= len(val_loader)
+                self.val_losses.append(val_loss)
 
             self.train_losses.append(train_loss)
-            self.val_losses.append(val_loss)
 
             # Step the scheduler based on validation loss
-            scheduler.step(val_loss)
-            self.effective_epochs += 1
-            early_stopping(val_loss)
-            if early_stopping.early_stop:
-                print("Stopping training.")
-                break
+            if val_loader:
+                scheduler.step(val_loss)
+                self.effective_epochs += 1
+                early_stopping(val_loss)
+                if early_stopping.early_stop:
+                    print("Stopping training.")
+                    break
+            else:
+                scheduler.step(train_loss)
+            print(train_loss)
 
     def fit(
         self,
@@ -131,15 +140,20 @@ class ClassifierModel(nn.Module, ClassifierMixin, BaseEstimator):
         """
         self.classes_ = np.unique(y)
         dataset = TabularDataset(X, y)
-        gen = torch.Generator().manual_seed(random_state)
-        train_dataset, val_dataset = random_split(
-            dataset, [1 - val_frac, val_frac], generator=gen
-        )
-        self.train_dataset = train_dataset
-        self.val_dataset = val_dataset
+        gen = torch.Generator(device="cuda").manual_seed(random_state)
+        val_loader = None
+        if val_frac > 0.0:
+            train_dataset, val_dataset = random_split(
+                dataset, [1 - val_frac, val_frac], generator=gen
+            )
+            self.train_dataset = train_dataset
+            self.val_dataset = val_dataset
 
-        train_loader = DataLoader(train_dataset, batch_size=batch_size)
-        val_loader = DataLoader(val_dataset, batch_size=batch_size)
+            train_loader = DataLoader(train_dataset, batch_size=batch_size)
+            val_loader = DataLoader(val_dataset, batch_size=batch_size)
+        else:
+            train_dataset = dataset
+            train_loader = DataLoader(train_dataset, batch_size=batch_size)
         self._fit(
             train_loader=train_loader,
             val_loader=val_loader,

@@ -233,7 +233,7 @@ class LabelRankingModel(nn.Module):
         :param X: Features
         :return: Predicted class label
         """
-        skills = self.predict_class_skills(X)
+        skills = self.predict_class_skills(X).cpu().detach().numpy()
         return np.argmax(skills, axis=1)
 
 
