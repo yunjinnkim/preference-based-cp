@@ -257,7 +257,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
     num_epochs = 300
     learning_rate = 0.01
     cal_size = parameters["fraction_cal_samples"]
-    alphas = [0.001,0.002,0.005,0.01, 0.02,0.05, 0.1, 0.2]
+    alphas = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2]
 
     X_train, X_cal, y_train, y_cal = train_test_split(
         X_train, y_train, test_size=cal_size
@@ -414,7 +414,7 @@ if __name__ == "__main__":
     print(sys.version)
 
     experimenter = PyExperimenter(
-        experiment_configuration_file_path="./experiments/config/cfg_simple_debug.yml",
+        experiment_configuration_file_path="./config/cfg_cal_size_sensitivity.yml",
         use_codecarbon=False,
     )
 

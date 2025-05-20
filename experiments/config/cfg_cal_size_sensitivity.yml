@@ -1,0 +1,46 @@
+PY_EXPERIMENTER:
+    n_jobs: 14
+
+    Database:
+      provider: sqlite
+      database: cal_size_db
+      table:
+        name: cp_rank_dev__new_cross
+        keyfields: 
+          model:
+            type: VARCHAR(255)
+            values: ['classifier', 'ranker']
+            # values: ['ranker']
+            # values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
+          openml_id:
+            type: INTEGER
+            values: [35,54,61, 187, 15, 31, 4534]
+            # values: [41]
+          master_seed:
+            type: Integer
+            values: [1,2]
+            # values: [1,2]
+          fraction_cal_samples:
+            type: FLOAT
+            values: [0.1, 0.2, 0.3, 0.4, 0.5]
+
+        resultfields:
+          clf_seed: LONG
+          mccv_seed: LONG
+
+      logtables:
+        results:
+          conformity_score: VARCHAR(255)
+          alpha: FLOAT
+          score_f1: FLOAT 
+          score_acc: FLOAT 
+          score_bacc: FLOAT 
+          # score_roc_auc: FLOAT 
+          coverage_mean: FLOAT 
+          coverage_std: FLOAT 
+          efficiency_mean: FLOAT 
+          efficiency_std: FLOAT
+          gradient_updates: LONG
+          clf_seed: LONG
+          mccv_seed: LONG
+
