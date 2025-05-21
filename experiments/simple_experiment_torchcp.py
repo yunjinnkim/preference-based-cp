@@ -1,7 +1,7 @@
 import joblib
 import torchcp
 
-joblib.parallel_config(backend="multiprocessing")
+joblib.parallel_config(backend="threading")
 
 import joblib._store_backends
 import sys
@@ -13,7 +13,7 @@ from math import ceil, log2
 import numpy as np
 import torch
 
-torch.set_default_device("cpu")
+torch.set_default_device("cuda:1")
 import openml
 import mysql.connector
 import types

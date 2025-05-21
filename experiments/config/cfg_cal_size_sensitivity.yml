@@ -1,5 +1,5 @@
 PY_EXPERIMENTER:
-    n_jobs: 14
+    n_jobs: 8
 
     Database:
       provider: sqlite
@@ -14,15 +14,16 @@ PY_EXPERIMENTER:
             # values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
           openml_id:
             type: INTEGER
-            values: [35,54,61, 187, 15, 31, 4534]
+            values: [54,4534]
             # values: [41]
           master_seed:
             type: Integer
-            values: [1,2]
+            values: [1,2,3,4,5,6,7,8,9,10]
             # values: [1,2]
           fraction_cal_samples:
             type: FLOAT
             values: [0.1, 0.2, 0.3, 0.4, 0.5]
+
 
         resultfields:
           clf_seed: LONG
@@ -30,17 +31,20 @@ PY_EXPERIMENTER:
 
       logtables:
         results:
+          coverage_rate: VARCHAR(255)
+          average_size: FLOAT
+          cov_gap: FLOAT
+          vio_classes: FLOAT
+          # diff_violation: FLOAT
+          sscv: FLOAT
+          wsc: FLOAT
+          acc: FLOAT
+          bacc: FLOAT
           conformity_score: VARCHAR(255)
           alpha: FLOAT
-          score_f1: FLOAT 
-          score_acc: FLOAT 
-          score_bacc: FLOAT 
-          # score_roc_auc: FLOAT 
-          coverage_mean: FLOAT 
-          coverage_std: FLOAT 
-          efficiency_mean: FLOAT 
-          efficiency_std: FLOAT
           gradient_updates: LONG
           clf_seed: LONG
           mccv_seed: LONG
-
+          len_train: LONG
+          len_test: LONG
+          len_cal: LONG

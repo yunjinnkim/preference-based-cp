@@ -139,7 +139,7 @@ class ClassifierModel(nn.Module, ClassifierMixin, BaseEstimator):
         """
         self.classes_ = np.unique(y)
         dataset = TabularDataset(X, y)
-        gen = torch.Generator(device="cuda").manual_seed(random_state)
+        gen = torch.Generator(device="cpu").manual_seed(random_state)
         val_loader = None
         if val_frac > 0.0:
             train_dataset, val_dataset = random_split(
