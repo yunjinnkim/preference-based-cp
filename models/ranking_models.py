@@ -202,7 +202,7 @@ class LabelRankingModel(nn.Module):
             )
         else:
             dataset = LabelPairDataset(X, y, num_classes=self.num_classes)
-        gen = torch.Generator(device=torch.get_default_device()).manual_seed(random_state)
+        gen = torch.Generator().manual_seed(random_state)
 
         train_dataset, val_dataset = random_split(
             dataset, [1 - val_frac, val_frac], generator=gen
@@ -233,7 +233,7 @@ class LabelRankingModel(nn.Module):
         :param X: Features
         :return: Predicted class label
         """
-        skills = self.predict_class_skills(X)
+        skills = self.predict_class_skills(X).cpu().detach().numpy()
         return np.argmax(skills, axis=1)
 
 

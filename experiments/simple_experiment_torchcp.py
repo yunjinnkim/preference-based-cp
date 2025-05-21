@@ -6,13 +6,14 @@ joblib.parallel_config(backend="multiprocessing")
 import joblib._store_backends
 import sys
 
-sys.path.insert(0, "/home/ra43rid/torch_plnet")
+sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
 
 import random
 from math import ceil, log2
 import numpy as np
 import torch
-torch.set_default_device("cuda")
+
+torch.set_default_device("cpu")
 import openml
 import mysql.connector
 import types
@@ -39,6 +40,7 @@ from py_experimenter.database_connector_mysql import (
     DatabaseConnectorMYSQL,
     DatabaseConnector,
 )
+
 
 def connect(self):
 
@@ -87,7 +89,7 @@ def evaluate(
     result_processor,
     len_train,
     len_test,
-    len_cal
+    len_cal,
 ):
 
     predictions_sets_list = []
@@ -151,7 +153,6 @@ def evaluate(
                 alpha=alpha,
                 num_classes=num_classes,
             ),
-
             "sscv": metric("SSCV")(
                 prediction_sets=val_prediction_sets,
                 labels=val_labels,
@@ -175,7 +176,7 @@ def evaluate(
                 "mccv_seed": mccv_split_seed,
                 "len_train": len_train,
                 "len_test": len_test,
-                "len_cal": len_cal
+                "len_cal": len_cal,
             }
         )
 
@@ -256,7 +257,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
     num_epochs = 300
     learning_rate = 0.01
     cal_size = parameters["fraction_cal_samples"]
-    alphas = [0.05, 0.1, 0.2]
+    alphas = [0.001,0.002,0.005,0.01, 0.02,0.05, 0.1, 0.2]
 
     X_train, X_cal, y_train, y_cal = train_test_split(
         X_train, y_train, test_size=cal_size
@@ -266,7 +267,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
         case "classifier":
             model = ClassifierModel(
-                input_dim=X_train.shape[1], hidden_dims=[20,20], output_dim=num_classes
+                input_dim=X_train.shape[1], hidden_dims=[20, 20], output_dim=num_classes
             )
             # model.cuda()
             model.fit(
@@ -292,14 +293,24 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             ds_cal = TabularDataset(X_cal, y_cal)
             test_loader = DataLoader(ds_test)
             cal_loader = DataLoader(ds_cal)
-            
+
             len_train = len(X_train)
             len_test = len(ds_test)
             len_cal = len(ds_cal)
 
             names = ["rand_aps", "aps", "thr", "topk", "raps", "saps", "margin"]
-            conformity_scores = [APS(randomized=True), APS(randomized=False), THR(), TOPK(), RAPS(), SAPS(), Margin()]
-            for (name, conformity_score), alpha in product(zip(names,conformity_scores), alphas):
+            conformity_scores = [
+                APS(randomized=True),
+                APS(randomized=False),
+                THR(),
+                TOPK(),
+                RAPS(),
+                SAPS(),
+                Margin(),
+            ]
+            for (name, conformity_score), alpha in product(
+                zip(names, conformity_scores), alphas
+            ):
                 predictor = SplitPredictor(conformity_score, model)
 
                 gradient_updates = predictor._model.gradient_updates
@@ -319,7 +330,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                     result_processor,
                     len_train,
                     len_test,
-                    len_cal
+                    len_cal,
                 )
 
             result_processor.process_results(
@@ -328,7 +339,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
         case "ranker":
             model = LabelRankingModel(
-                input_dim=X_train.shape[1], hidden_dims=[20,20], output_dim=num_classes
+                input_dim=X_train.shape[1], hidden_dims=[20, 20], output_dim=num_classes
             )
             model.fit(
                 X_train,
@@ -344,10 +355,16 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             # predictor.fit(X_cal, y_cal)
 
             predictor_vanilla = SplitPredictor(IDENTITY(), model)
-            predictor_own_aps = SplitPredictor(OWN_APS(randomized=False),model)
-            predictor_own_randomized_aps = SplitPredictor(OWN_APS(randomized=True),model)
+            predictor_own_aps = SplitPredictor(OWN_APS(randomized=False), model)
+            predictor_own_randomized_aps = SplitPredictor(
+                OWN_APS(randomized=True), model
+            )
 
-            predictors = [predictor_vanilla, predictor_own_aps, predictor_own_randomized_aps]
+            predictors = [
+                predictor_vanilla,
+                predictor_own_aps,
+                predictor_own_randomized_aps,
+            ]
             names = ["ranker_vanilla", "ranker_own_aps", "ranker_own_rand_aps"]
 
             X_test = preprocessor.transform(X_test_orig)
@@ -367,7 +384,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
 
             test_loader = DataLoader(ds_test)
             cal_loader = DataLoader(ds_cal)
-            for (name, predictor), alpha in product(zip(names,predictors), alphas):
+            for (name, predictor), alpha in product(zip(names, predictors), alphas):
                 gradient_updates = predictor_vanilla._model.gradient_updates
                 predictor.calibrate(cal_loader, alpha)
 
@@ -384,19 +401,20 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                     result_processor,
                     len_train,
                     len_test,
-                    len_cal
+                    len_cal,
                 )
 
             result_processor.process_results(
                 {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
             )
 
+
 if __name__ == "__main__":
 
     print(sys.version)
 
     experimenter = PyExperimenter(
-        experiment_configuration_file_path="./config/cfg_simple_debug.yml",
+        experiment_configuration_file_path="./experiments/config/cfg_simple_debug.yml",
         use_codecarbon=False,
     )
 
