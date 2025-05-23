@@ -5,11 +5,6 @@ joblib.parallel_config(backend="multiprocessing")
 import joblib._store_backends
 import sys
 
-# sys.path.insert(0, "/dss/dsshome1/04/ra43rid2/rank_cp/")
-
-# sys.path.insert(0, "C:/Users/jonas/Documents/Research/torch_plnet")
-sys.path.insert(0, "/home/jonas/Documents/Research/")
-
 import random
 from math import ceil, log2
 import numpy as np
