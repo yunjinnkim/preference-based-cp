@@ -1,0 +1,1 @@
+This repository contains the code corresponding to the UAI 2025 paper "Conformal Prediction without Nonconformity Scores" authored by Jonas Hanselle, Alireza Javanmardi, Tobias Oberkofler, Yusuf Sale and Eyke Hüllermeier.
