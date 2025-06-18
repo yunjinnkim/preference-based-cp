@@ -10,16 +10,12 @@ PY_EXPERIMENTER:
           model:
             type: VARCHAR(255)
             values: ['classifier', 'ranker']
-            # values: ['ranker']
-            # values: ['plnet', 'classifier_nn', 'random_forest', 'plnet_cross_instance', 'plnet_clf_arch']
           openml_id:
             type: INTEGER
             values: [54,4534]
-            # values: [41]
           master_seed:
             type: Integer
             values: [1,2,3,4,5,6,7,8,9,10]
-            # values: [1,2]
           fraction_cal_samples:
             type: FLOAT
             values: [0.1, 0.2, 0.3, 0.4, 0.5]
@@ -35,7 +31,6 @@ PY_EXPERIMENTER:
           average_size: FLOAT
           cov_gap: FLOAT
           vio_classes: FLOAT
-          # diff_violation: FLOAT
           sscv: FLOAT
           wsc: FLOAT
           acc: FLOAT
