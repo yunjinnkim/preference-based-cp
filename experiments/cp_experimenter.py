@@ -73,7 +73,7 @@ from sklearn.metrics import (
     balanced_accuracy_score,
 )
 
-
+# 결과 테이블 생성
 def evaluate(
     predictor,
     model,
@@ -105,7 +105,7 @@ def evaluate(
             labels = batch[1]
 
             # Get predictions as bool tensor (N x C)
-            if isinstance(predictor, ConformalPredictor):
+            if isinstance(predictor, ConformalPredictor): # ConformalPredictor-> prediction set 반환
                 batch_predictions = predictor.predict(inputs, alpha=alpha)
             else:
                 batch_predictions = predictor.predict(inputs)
@@ -296,7 +296,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             len_test = len(ds_test)
             len_cal = len(ds_cal)
 
-            names = ["rand_aps", "aps", "thr", "topk", "raps", "saps", "margin"]
+            names = ["rand_aps", "aps", "thr", "topk", "raps", "saps", "margin"] # 다양한 nonconformity score
             conformity_scores = [
                 APS(randomized=True),
                 APS(randomized=False),
@@ -335,7 +335,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
                 {"mccv_seed": mccv_split_seed, "clf_seed": clf_seed}
             )
 
-        case "ranker":
+        case "ranker": # label ranking 모델 학습
             model = LabelRankingModel(
                 input_dim=X_train.shape[1], hidden_dims=[20, 20], output_dim=num_classes
             )
@@ -352,6 +352,7 @@ def worker(parameters: dict, result_processor: ResultProcessor, custom_config: d
             # predictor = ConformalPredictor(model)
             # predictor.fit(X_cal, y_cal)
 
+            # 순위 기반 모델에 맞는 predictor 3가지 변형
             predictor_vanilla = SplitPredictor(IDENTITY(), model)
             predictor_own_aps = SplitPredictor(OWN_APS(randomized=False), model)
             predictor_own_randomized_aps = SplitPredictor(
