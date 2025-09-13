@@ -10,6 +10,7 @@ class ConformalPredictor:
     def __init__(self, model):
         self._model = model
 
+    # calibration data의 nonconformity score 계산
     def fit(self, X_cal, y_cal, **kwargs):
         self.X_cal = X_cal
         self.y_cal = y_cal
@@ -17,8 +18,9 @@ class ConformalPredictor:
             y_pred_cal = self._model.predict_class_skills(self.X_cal)
         else:
             y_pred_cal = self._model.predict_proba(self.X_cal)
-        self.scores = 1 - y_pred_cal[np.arange(len(self.y_cal)), self.y_cal]
+        self.scores = 1 - y_pred_cal[np.arange(len(self.y_cal)), self.y_cal] # nonconformity score?
 
+    
     def predict_set(self, X, alpha=0.2):
         n = len(self.scores)
         self.threshold = np.quantile(
